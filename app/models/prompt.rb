@@ -10,10 +10,12 @@ class Prompt
   def self.all
     results = DB.exec("SELECT * FROM prompts ORDER BY id DESC;")
     return results.map do |result|
+      body = nil
+      if (result["body"] != "NULL") then body = result["body"] end
       {
         id: result["id"].to_i,
         title: result["title"],
-        body: result["body"],
+        body: body,
         user_id: result["user_id"].to_i
       }
     end

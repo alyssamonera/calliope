@@ -35,6 +35,18 @@ class App extends React.Component{
       user_id: null,
       id: null
     }
+    switch (view){
+      case 'show':
+        currentPrompt = {
+          title: prompt.title,
+          body: prompt.body,
+          user_id: prompt.user_id,
+          id: prompt.id
+        }
+        break;
+      default:
+        break;
+    }
     this.setState({
       view: view,
       formInputs: formInputs,
@@ -46,7 +58,7 @@ class App extends React.Component{
     return (
       <div>
         <Header handleView={this.handleView} />
-        <Main view={this.state.view} />
+        <Main view={this.state.view} currentPrompt={this.state.currentPrompt} handleView={this.handleView} />
       </div>
     )
   }

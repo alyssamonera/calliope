@@ -4,7 +4,7 @@ class Prompt extends Component {
   render(){
     return (
       <div>
-        <h1>{this.props.prompt.title}</h1>
+        <h1 onClick={() => {this.props.handleView('show', this.props.prompt)}}>{this.props.prompt.title}</h1>
       </div>
     )
   }

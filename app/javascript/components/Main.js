@@ -1,6 +1,7 @@
 import React from 'react'
 import Form from './Form.js'
 import Prompt from './Prompt.js'
+import Show from './Show.js'
 
 class Main extends React.Component {
   constructor(){
@@ -44,9 +45,11 @@ class Main extends React.Component {
   render(){
     return (
       <main>
-        {this.props.view === 'index'
-          ? this.state.prompts.map(prompt => <Prompt prompt={prompt} key={prompt.id} />)
-          : <Form addPrompt={this.addPrompt} className="new-prompt" />
+        {this.props.currentPrompt.title
+          ? <Show prompt={this.props.currentPrompt} />
+          : this.props.view === 'index'
+            ? this.state.prompts.map(prompt => <Prompt prompt={prompt} key={prompt.id} handleView={this.props.handleView} />)
+            : <Form addPrompt={this.addPrompt} className="new-prompt" />
         }
       </main>
     )
