@@ -1,24 +1,25 @@
-# README
+# calliope
+Calliope redone with Ruby on Rails, React, and AWS
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# User Stories
+* Users can sign up with their email address and verify their account through an email confirmation link.
+* Users can browse stories and prompts as guests, but must log in to create prompts or stories.
+* STRETCH: Users can add stories and prompts to their favorites.
+* STRETCH: Users can have photo and video prompts.
 
-Things you may want to cover:
+# Planned Features
 
-* Ruby version
+## Minimum Viable Product (MVP)
+* Has full CRUD for at least one model
+* Has at least two models that are related to each other
+* Runs on Ruby on Rails
+* Uses a Postgresql database that is hosted with an AWS Relational Database Service (RDS)
+* Utilizes the AWS authentication service, Cognito
 
-* System dependencies
+## Stretch Goals
+* Utilizes a rich text editor
+* Has three models that are all related to each other
 
-* Configuration
+# "Wireframe"
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+The product should look more or less the same as [this site](https://calliope-app.herokuapp.com/) with some minor adjustments.
