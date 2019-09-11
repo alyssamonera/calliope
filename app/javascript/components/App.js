@@ -45,7 +45,7 @@ class App extends React.Component {
         <ul>
           {this.state.prompts.map(prompt => <li key={prompt.id}>{prompt.title}</li>)}
         </ul>
-        <Form />
+        <Form addPrompt={this.addPrompt} />
       </div>
     )
   }

@@ -16,9 +16,14 @@ class Form extends Component {
     })
   }
 
+  handleSubmit = (event) => {
+    event.preventDefault()
+    this.props.addPrompt(this.state)
+  }
+
   render(){
     return (
-      <form>
+      <form onSubmit={this.handleSubmit}>
 
         <label htmlFor="title">Title</label>
         <input type="text" placeholder="title" value={this.state.title} id="title" onChange={this.handleChange}/>
