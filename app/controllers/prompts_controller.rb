@@ -9,4 +9,12 @@ class PromptsController < ApplicationController
     render json: Prompt.create(params["prompt"])
   end
 
+  def show
+    render json: Prompt.find(params["id"])
+  end
+
+  def update
+    render json: Prompt.update(params["id"], params["prompt"])
+  end
+
 end

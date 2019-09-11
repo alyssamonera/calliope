@@ -18,12 +18,47 @@ class Prompt
     end
   end
 
+  def self.find(id)
+    results = DB.exec("SELECT * FROM prompts WHERE id = #{id}")
+    result = results.first
+    body = nil
+    if (result["body"] != "NULL") then body = result["body"] end
+    return {
+      id: result["id"].to_i,
+      title: result["title"],
+      body: body,
+      user_id: result["user_id"].to_i
+    }
+  end
+
   def self.create(opts)
     results = DB.exec(
       <<-SQL
         INSERT INTO prompts (title, body, user_id)
         VALUES ('#{opts["title"]}', '#{opts["body"] ? opts["body"] : "NULL"}', #{opts["user_id"]})
         RETURNING id, title, body, user_id;
+      SQL
+    )
+    result = results.first
+    body = nil
+    if (result["body"] != "NULL") then body = result["body"] end
+    return {
+      id: result["id"].to_i,
+      title: result["title"],
+      body: body,
+      user_id: result["user_id"].to_i
+    }
+  end
+
+  def self.update(id, opts)
+    results = DB.exec(
+      <<-SQL
+        UPDATE prompts
+        SET
+          title='#{opts["title"]}',
+          body='#{opts["body"] ? opts["body"] : "NULL"}'
+        WHERE id = #{id}
+        RETURNING id, title, body, user_id
       SQL
     )
     result = results.first
