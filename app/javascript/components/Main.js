@@ -82,18 +82,21 @@ class Main extends React.Component {
 
   render(){
     return (
-      <main>
+      <main className={this.props.view === 'index' ? "prompt-index" : ""}>
         {this.props.currentPrompt.title
           ? <Show
             prompt={this.props.currentPrompt}
             deletePrompt={this.deletePrompt}
             handleView={this.props.handleView} />
           : this.props.view === 'index'
-            ? this.state.prompts.map(prompt =>
-              <Prompt
-                prompt={prompt}
-                key={prompt.id}
-                handleView={this.props.handleView} />)
+            ? <div>
+                <h3> Prompts </h3>
+                {this.state.prompts.map(prompt =>
+                <Prompt
+                  prompt={prompt}
+                  key={prompt.id}
+                  handleView={this.props.handleView} />)}
+              </div>
             : <Form
                 addPrompt={this.addPrompt}
                 updatePrompt={this.updatePrompt}
