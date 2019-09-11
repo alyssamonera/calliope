@@ -26,7 +26,7 @@ class App extends React.Component{
     let formInputs = {
       title: '',
       body: '',
-      user_id: null,
+      user_id: 1,
       id: null
     }
     let currentPrompt = {
