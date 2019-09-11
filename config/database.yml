@@ -15,6 +15,9 @@ test:
   database: calliope_test
 
 production:
-  <<: *default
-  url: <%= ENV['DATABASE_URL'] %>
-  database: calliope
+  adapter: postgresql
+  encoding: unicode
+  database: <%= ENV['DATABASE_URL'] %>
+  pool: 5
+  username: alyssadm
+  password:
