@@ -38,6 +38,24 @@ class Main extends React.Component {
       })
   }
 
+  deletePrompt = (id) => {
+    fetch(`/prompts/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(data => {
+        this.props.handleView('index')
+        this.setState(prevState => {
+          const prompts = prevState.prompts.filter(prompt => prompt.id !== id)
+          return {prompts}
+        })
+      })
+      .catch(err => console.log(err))
+  }
+
   componentDidMount() {
     this.fetchPrompts()
   }
@@ -46,9 +64,15 @@ class Main extends React.Component {
     return (
       <main>
         {this.props.currentPrompt.title
-          ? <Show prompt={this.props.currentPrompt} />
+          ? <Show
+            prompt={this.props.currentPrompt}
+            deletePrompt={this.deletePrompt} />
           : this.props.view === 'index'
-            ? this.state.prompts.map(prompt => <Prompt prompt={prompt} key={prompt.id} handleView={this.props.handleView} />)
+            ? this.state.prompts.map(prompt =>
+              <Prompt
+                prompt={prompt}
+                key={prompt.id}
+                handleView={this.props.handleView} />)
             : <Form addPrompt={this.addPrompt} className="new-prompt" />
         }
       </main>
