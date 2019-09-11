@@ -72,4 +72,10 @@ class Prompt
     }
   end
 
+  def self.delete(id)
+    results = DB.exec("DELETE FROM prompts WHERE id = #{id}")
+    return {deleted: true}
+  end
+
+
 end

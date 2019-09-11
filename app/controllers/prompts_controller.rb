@@ -17,4 +17,8 @@ class PromptsController < ApplicationController
     render json: Prompt.update(params["id"], params["prompt"])
   end
 
+  def delete
+    render json: Prompt.delete(params["id"])
+  end
+
 end
