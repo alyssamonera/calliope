@@ -1,51 +1,52 @@
 import React from 'react'
-import Form from './Form.js'
+import Main from './Main.js'
+import Header from './Header.js'
 
-class App extends React.Component {
+class App extends React.Component{
   constructor(){
     super()
     this.state = {
-      prompts: []
+      view: 'index',
+      formInputs: {
+        title: null,
+        body: null,
+        user_id: null,
+        id: null
+      },
+      currentPrompt: {
+        title: null,
+        body: null,
+        user_id: null,
+        id: null
+      }
     }
   }
 
-  fetchPrompts = () => {
-    fetch('/prompts')
-      .then(data => data.json())
-      .then(jData => {
-        this.setState({prompts: jData})
-      })
-  }
-
-  addPrompt = (prompt) => {
-    fetch('/prompts', {
-      body: JSON.stringify(prompt),
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json, text/plain, */*',
-        'Content-Type': 'application/json'
-      }
+  handleView = (view, prompt) => {
+    let formInputs = {
+      title: '',
+      body: '',
+      user_id: null,
+      id: null
+    }
+    let currentPrompt = {
+      title: '',
+      body: '',
+      user_id: null,
+      id: null
+    }
+    this.setState({
+      view: view,
+      formInputs: formInputs,
+      currentPrompt: currentPrompt
     })
-      .then(createdPrompt => {return createdPrompt.json()})
-      .then(jsonedPrompt => {
-        this.setState(prevState => {
-          prevState.prompts.unshift(jsonedPrompt)
-          return {prompts: prevState.prompts}
-        })
-      })
-  }
-
-  componentDidMount() {
-    this.fetchPrompts()
   }
 
   render(){
     return (
       <div>
-        <ul>
-          {this.state.prompts.map(prompt => <li key={prompt.id}>{prompt.title}</li>)}
-        </ul>
-        <Form addPrompt={this.addPrompt} />
+        <Header handleView={this.handleView} />
+        <Main view={this.state.view} />
       </div>
     )
   }
