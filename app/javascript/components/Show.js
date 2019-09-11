@@ -8,7 +8,7 @@ class Show extends Component {
         <h3> {this.props.prompt.body ? this.props.prompt.body : ""} </h3>
 
         <div className="prompt-options">
-          <button className="btn btn-light">
+          <button onClick={() => {this.props.handleView('editPage', this.props.prompt)}} className="btn btn-light">
             Edit
           </button>
 

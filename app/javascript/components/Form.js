@@ -18,12 +18,31 @@ class Form extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault()
-    this.props.addPrompt(this.state)
+    if (this.props.view === "addPage") {
+      this.props.addPrompt(this.state)
+    } else {
+      this.props.updatePrompt(this.state)
+    }
+  }
+
+  componentDidMount() {
+    this.setState({
+      title: this.props.formInputs.title,
+      body: this.props.formInputs.body,
+      user_id: this.props.formInputs.user_id,
+      id: this.props.formInputs.id
+    })
   }
 
   render(){
     return (
       <form onSubmit={this.handleSubmit} className="prompt-form">
+
+        <h1>
+          {this.props.view === "addPage"
+            ? "Add a new prompt"
+            : "Edit your prompt"}
+        </h1>
 
         <label htmlFor="title">Title</label>
         <input type="text" placeholder="title" value={this.state.title} id="title" onChange={this.handleChange}/>

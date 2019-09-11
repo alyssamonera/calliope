@@ -38,6 +38,26 @@ class Main extends React.Component {
       })
   }
 
+  updatePrompt = (prompt) => {
+    fetch(`/prompts/${prompt.id}`, {
+      body: JSON.stringify(prompt),
+      method: 'PUT',
+      headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(updatedPrompt => {
+        this.props.handleView('index')
+        this.setState(prevState => {
+          let index = prevState.prompts.findIndex(eachPrompt => eachPrompt.id === prompt.id)
+          prevState.prompts.splice(index, 1, prompt)
+          return {prompts: prevState.prompts}
+        })
+      })
+      .catch(err => console.log(err))
+  }
+
   deletePrompt = (id) => {
     fetch(`/prompts/${id}`, {
       method: 'DELETE',
@@ -66,14 +86,20 @@ class Main extends React.Component {
         {this.props.currentPrompt.title
           ? <Show
             prompt={this.props.currentPrompt}
-            deletePrompt={this.deletePrompt} />
+            deletePrompt={this.deletePrompt}
+            handleView={this.props.handleView} />
           : this.props.view === 'index'
             ? this.state.prompts.map(prompt =>
               <Prompt
                 prompt={prompt}
                 key={prompt.id}
                 handleView={this.props.handleView} />)
-            : <Form addPrompt={this.addPrompt} className="new-prompt" />
+            : <Form
+                addPrompt={this.addPrompt}
+                updatePrompt={this.updatePrompt}
+                className="new-prompt"
+                formInputs={this.props.formInputs}
+                view={this.props.view} />
         }
       </main>
     )

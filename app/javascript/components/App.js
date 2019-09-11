@@ -44,6 +44,13 @@ class App extends React.Component{
           id: prompt.id
         }
         break;
+      case 'editPage':
+        formInputs = {
+          title: prompt.title,
+          body: prompt.body,
+          user_id: prompt.user_id,
+          id: prompt.id
+        }
       default:
         break;
     }
@@ -58,7 +65,10 @@ class App extends React.Component{
     return (
       <div>
         <Header handleView={this.handleView} />
-        <Main view={this.state.view} currentPrompt={this.state.currentPrompt} handleView={this.handleView} />
+        <Main
+          view={this.state.view}
+          currentPrompt={this.state.currentPrompt} handleView={this.handleView}
+          formInputs={this.state.formInputs} />
       </div>
     )
   }
