@@ -2,6 +2,7 @@ import React from 'react'
 import Form from './Form.js'
 import Prompt from './Prompt.js'
 import Show from './Show.js'
+import AuthPage from './AuthPage.js'
 
 class Main extends React.Component {
   constructor(){
@@ -97,7 +98,9 @@ class Main extends React.Component {
                   key={prompt.id}
                   handleView={this.props.handleView} />)}
               </div>
-            : <Form
+            : this.props.view === 'login'
+              ? <AuthPage />
+              : <Form
                 addPrompt={this.addPrompt}
                 updatePrompt={this.updatePrompt}
                 className="new-prompt"

@@ -12,6 +12,12 @@ class Header extends Component {
           <h1 onClick={() => {this.props.handleView('index')}}>
             Calliope
           </h1>
+
+          <div className="title-links">
+            <button className="btn btn-dark" onClick={() => {this.props.handleView('login')}}>Log In</button>
+            <button className="btn btn-dark">Sign Up</button>
+          </div>
+
         </div>
 
         <nav>

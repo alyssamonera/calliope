@@ -150,41 +150,62 @@ footer{
   margin-left: -2em;
 }
 
-/* FORMS */
+/* ADD/EDIT PROMPT */
 
 .new-prompt{
   margin-top: 4em;
   margin-left: 1em;
 }
 
-label{
+.prompt-form label{
   text-align: left;
   display: block;
 }
 
-input[type=text], textarea{
+.prompt-form input[type=text], textarea{
   outline-color: black;
 }
 
-input[type=text]{
+.prompt-form input[type=text]{
   display: inline;
   text-align: left;
   width: 400px;
 }
 
-input[type=submit]{
+.prompt-form input[type=submit], .prompt-form input[type=number]{
   display: block;
   margin: 0;
   margin-bottom: 1em;
 }
 
-textarea{
+.prompt-form textarea{
   display: block;
   text-align: left;
   height: 20vh;
   width: 90%;
   margin-bottom: 1em;
   resize: none;
+}
+
+/* LOGIN FORM */
+
+.login-page {
+  text-align: center;
+}
+
+.login-page form{
+  display: block;
+  margin: 0 auto;
+}
+
+.login-page label, input{
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.login-page input{
+  margin-bottom: 1em;
 }
 
 /* INDEX DISPLAY */
