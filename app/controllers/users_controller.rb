@@ -5,4 +5,8 @@ class UsersController < ApplicationController
     render json: User.create(params["user"])
   end
 
+  def findId
+    render json: User.find(params["username"])
+  end
+
 end

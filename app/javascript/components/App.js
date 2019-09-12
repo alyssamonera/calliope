@@ -21,7 +21,8 @@ class App extends React.Component{
       },
       currentUser: {
         isAuthenticated: false,
-        user: null
+        user: null,
+        id: null
       }
     }
   }
@@ -29,7 +30,10 @@ class App extends React.Component{
   handleView = (view, prompt) => {
     let user = {username: null}
     if (this.state.currentUser.user){
-      user = {username: this.state.currentUser.user.username}
+      user = {
+        username: this.state.currentUser.user.username,
+        id: this.state.currentUser.id
+      }
     }
     let formInputs = {
       title: '',
@@ -43,7 +47,6 @@ class App extends React.Component{
       user: null,
       id: null
     }
-    let currentUser = this.state.currentUser
     switch (view){
       case 'show':
         currentPrompt = {
@@ -66,19 +69,23 @@ class App extends React.Component{
     this.setState({
       view: view,
       formInputs: formInputs,
-      currentPrompt: currentPrompt,
-      currentUser: currentUser
+      currentPrompt: currentPrompt
     })
   }
 
   setAuth = (authenticated, user) => {
-    this.setState({
-      currentUser: {
-        user: user,
-        isAuthenticated: authenticated
-      }
-    })
-    this.handleView('index')
+    fetch(`/login/${user.username}`)
+      .then(data => data.json())
+      .then(jData => {
+        this.setState({
+          currentUser: {
+            user: user,
+            isAuthenticated: authenticated,
+            id: parseInt(jData.id)
+          }
+        })
+        this.handleView('index')
+      })
   }
 
   render(){

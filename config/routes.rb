@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   delete '/prompts/:id', to: 'prompts#delete'
 
   # RESTFUL routes for USERS
+  get '/login/:username', to: 'users#findId'
   post '/signup', to: 'users#create'
 
 end

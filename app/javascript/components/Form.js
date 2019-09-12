@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Modal from './Modal.js'
 
 class Form extends Component {
   constructor(){
@@ -51,6 +52,8 @@ class Form extends Component {
         <textarea rows="10" cols="120" placeholder="body" value={this.state.body} id="body" onChange={this.handleChange} />
 
         <input type="submit" value={this.props.view === "addPage" ? "Add prompt" : "Submit edits"} />
+
+        {this.props.currentUser.id ? "" : <Modal />}
 
       </form>
     )

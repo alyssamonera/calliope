@@ -7,6 +7,11 @@ class User
     DB = PG.connect(host: "localhost", port: 5432, dbname: "calliope_development")
   end
 
+  def self.find(username)
+    results = DB.exec("SELECT id FROM users WHERE username='#{username}'")
+    return results.first
+  end
+
   def self.create(opts)
     results = DB.exec(
       <<-SQL

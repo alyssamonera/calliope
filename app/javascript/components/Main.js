@@ -142,7 +142,8 @@ class Main extends React.Component {
                   updatePrompt={this.updatePrompt}
                   className="new-prompt"
                   formInputs={this.props.formInputs}
-                  view={this.props.view} />
+                  view={this.props.view}
+                  currentUser={this.props.currentUser} />
         }
       </main>
     )
