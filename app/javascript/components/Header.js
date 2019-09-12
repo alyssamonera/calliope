@@ -1,8 +1,19 @@
 import React, {Component} from 'react'
+import { Auth } from 'aws-amplify'
 
 class Header extends Component {
   constructor(){
     super()
+  }
+
+  handleLogOut = async event => {
+    event.preventDefault()
+    try {
+      const signout = await Auth.signOut()
+      this.props.setAuth(false, null)
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   render(){
@@ -15,19 +26,21 @@ class Header extends Component {
 
           <div className="title-links">
             {this.props.currentUser.isAuthenticated && this.props.currentUser.user
-              ? <button className="btn btn-dark">
-                  Log Out ({this.props.currentUser.user.username})
+              ? <button
+                  className="btn btn-dark"
+                  onClick={this.handleLogOut}>
+                    Log Out ({this.props.currentUser.user.username})
                 </button>
               : <div>
                   <button
                     className="btn btn-dark"
-                    onClick={() => {this.props.handleView('login'); console.log(this.props)}}>
-                    Log In
+                    onClick={() => {this.props.handleView('login')}}>
+                      Log In
                   </button>
                   <button
                     className="btn btn-dark"
                     onClick={() => {this.props.handleView('signup')}}>
-                    Sign Up
+                      Sign Up
                   </button>
                 </div>
             }

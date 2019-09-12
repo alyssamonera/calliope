@@ -65,7 +65,6 @@ class App extends React.Component{
       currentPrompt: currentPrompt,
       currentUser: currentUser
     })
-    console.log(this.state);
   }
 
   setAuth = (authenticated, user) => {
