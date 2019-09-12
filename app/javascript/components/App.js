@@ -74,18 +74,29 @@ class App extends React.Component{
   }
 
   setAuth = (authenticated, user) => {
-    fetch(`/login/${user.username}`)
-      .then(data => data.json())
-      .then(jData => {
-        this.setState({
-          currentUser: {
-            user: user,
-            isAuthenticated: authenticated,
-            id: parseInt(jData.id)
-          }
+    if (authenticated){
+      fetch(`/login/${user.username}`)
+        .then(data => data.json())
+        .then(jData => {
+          this.setState({
+            currentUser: {
+              user: user,
+              isAuthenticated: authenticated,
+              id: parseInt(jData.id)
+            }
+          })
+          this.handleView('index')
         })
-        this.handleView('index')
+    } else {
+      this.setState({
+        currentUser: {
+          user: user,
+          isAuthenticated: authenticated,
+          id: null
+        }
       })
+      this.handleView('index')
+    }
   }
 
   render(){
