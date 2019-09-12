@@ -50,9 +50,9 @@ class Form extends Component {
         <label htmlFor="body">Body</label>
         <textarea rows="10" cols="120" placeholder="body" value={this.state.body} id="body" onChange={this.handleChange} />
 
-        <input type="submit" value={this.props.view === "addPage" ? "Add prompt" : "Submit edits"} />
+        <input type="submit" className="btn btn-dark" value={this.props.view === "addPage" ? "Add prompt" : "Submit edits"} />
 
-        {this.props.currentUser.id ? "" : <Modal />}
+        {this.props.currentUser.id ? "" : <Modal handleView={this.props.handleView} />}
 
       </form>
     )

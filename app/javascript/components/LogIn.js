@@ -39,7 +39,7 @@ class LogIn extends Component{
           <label htmlFor="password">Password</label>
           <input type="password" value={this.state.password} placeholder="Password" id="password" onChange={this.handleChange} />
 
-          <input type="submit" value="Log In" />
+          <input type="submit" value="Log In" className="btn btn-light" />
 
         </form>
       </div>

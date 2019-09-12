@@ -139,12 +139,13 @@ class Main extends React.Component {
               : this.props.view === 'signup'
                 ? <SignUp addUser={this.addUser} />
                 : <Form
-                  addPrompt={this.addPrompt}
-                  updatePrompt={this.updatePrompt}
-                  className="new-prompt"
-                  formInputs={this.props.formInputs}
-                  view={this.props.view}
-                  currentUser={this.props.currentUser} />
+                    addPrompt={this.addPrompt}
+                    updatePrompt={this.updatePrompt}
+                    className="new-prompt"
+                    formInputs={this.props.formInputs}
+                    view={this.props.view}
+                    currentUser={this.props.currentUser}
+                    handleView={this.props.handleView} />
         }
       </main>
     )

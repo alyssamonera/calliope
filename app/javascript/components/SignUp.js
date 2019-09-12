@@ -65,7 +65,7 @@ class SignUp extends Component {
           <label htmlFor="password">Password</label>
           <input type="password" id="password" value={this.state.password} placeholder="Password" onChange={this.handleChange} />
 
-          <input type="submit" value="Sign Up" />
+          <input type="submit" value="Sign Up" className="btn btn-dark" />
 
         </form>
       </div>
