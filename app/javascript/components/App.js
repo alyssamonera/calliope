@@ -39,6 +39,7 @@ class App extends React.Component{
       user_id: null,
       id: null
     }
+    let currentUser = this.state.currentUser
     switch (view){
       case 'show':
         currentPrompt = {
@@ -61,16 +62,19 @@ class App extends React.Component{
     this.setState({
       view: view,
       formInputs: formInputs,
-      currentPrompt: currentPrompt
+      currentPrompt: currentPrompt,
+      currentUser: currentUser
     })
+    console.log(this.state);
   }
 
-  setAuthStatus = (authenticated) => {
-    this.setState({ currentUser: {isAuthenticated: authenticated }})
-  }
-
-  setUser = (user) => {
-    this.setState({ currentUser: {user: user} })
+  setAuth = (authenticated, user) => {
+    this.setState({
+      currentUser: {
+        user: user,
+        isAuthenticated: authenticated
+      }
+    })
     this.handleView('index')
   }
 
@@ -78,15 +82,15 @@ class App extends React.Component{
     return (
       <div>
         <Header
-        handleView={this.handleView}
-        currentUser={this.state.currentUser} />
+          handleView={this.handleView}
+          currentUser={this.state.currentUser}
+          setAuth={this.setAuth} />
         <Main
           view={this.state.view}
           currentPrompt={this.state.currentPrompt} handleView={this.handleView}
           formInputs={this.state.formInputs}
           currentUser={this.state.currentUser}
-          setAuthStatus={this.setAuthStatus}
-          setUser={this.setUser} />
+          setAuth={this.setAuth} />
       </div>
     )
   }

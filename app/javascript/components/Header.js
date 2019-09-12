@@ -14,17 +14,24 @@ class Header extends Component {
           </h1>
 
           <div className="title-links">
-            {this.props.currentUser.isAuthenticated ? "Hello" : ""}
-            <button
-              className="btn btn-dark"
-              onClick={() => {this.props.handleView('login')}}>
-              Log In
-            </button>
-            <button
-              className="btn btn-dark"
-              onClick={() => {this.props.handleView('signup')}}>
-              Sign Up
-            </button>
+            {this.props.currentUser.isAuthenticated && this.props.currentUser.user
+              ? <button className="btn btn-dark">
+                  Log Out ({this.props.currentUser.user.username})
+                </button>
+              : <div>
+                  <button
+                    className="btn btn-dark"
+                    onClick={() => {this.props.handleView('login'); console.log(this.props)}}>
+                    Log In
+                  </button>
+                  <button
+                    className="btn btn-dark"
+                    onClick={() => {this.props.handleView('signup')}}>
+                    Sign Up
+                  </button>
+                </div>
+            }
+
           </div>
 
         </div>

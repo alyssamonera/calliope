@@ -15,9 +15,7 @@ class LogIn extends Component{
 
     try {
       const user = await Auth.signIn(this.state.username, this.state.password)
-      this.props.setUser(user)
-      this.props.setAuthStatus(true)
-
+      this.props.setAuth(true, user)
     } catch (error) {
       console.log(error)
     }
