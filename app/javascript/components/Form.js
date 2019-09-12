@@ -7,7 +7,6 @@ class Form extends Component {
     this.state = {
       title: "",
       body: "",
-      user: null
     }
   }
 
@@ -30,7 +29,7 @@ class Form extends Component {
     this.setState({
       title: this.props.formInputs.title,
       body: this.props.formInputs.body,
-      user: this.props.formInputs.user,
+      user_id: this.props.formInputs.user_id,
       id: this.props.formInputs.id
     })
   }

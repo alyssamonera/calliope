@@ -6,6 +6,8 @@ class PromptsController < ApplicationController
   end
 
   def create
+    params["prompt"]["title"].gsub! "'", "''"
+    params["prompt"]["body"].gsub! "'", "''"
     render json: Prompt.create(params["prompt"])
   end
 
@@ -14,6 +16,8 @@ class PromptsController < ApplicationController
   end
 
   def update
+    params["prompt"]["title"].gsub! "'", "''"
+    params["prompt"]["body"].gsub! "'", "''"
     render json: Prompt.update(params["id"], params["prompt"])
   end
 

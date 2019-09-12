@@ -68,14 +68,26 @@ class Prompt
         RETURNING id, title, body, user_id;
       SQL
     )
-    result = results.first
+    newPrompt = DB.exec(
+      <<-SQL
+        SELECT prompts.*, users.username
+        FROM prompts LEFT JOIN users
+        ON prompts.user_id = users.id
+        WHERE prompts.id = #{results.first["id"].to_i}
+      SQL
+    )
+    result = newPrompt.first
     body = nil
     if (result["body"] != "NULL") then body = result["body"] end
+    user = {
+      id: result["user_id"].to_i,
+      username: result["username"]
+    }
     return {
       id: result["id"].to_i,
       title: result["title"],
       body: body,
-      user_id: result["user_id"].to_i
+      user: user
     }
   end
 
@@ -90,14 +102,26 @@ class Prompt
         RETURNING id, title, body, user_id
       SQL
     )
-    result = results.first
+    updatedPrompt = DB.exec(
+      <<-SQL
+        SELECT prompts.*, users.username
+        FROM prompts LEFT JOIN users
+        ON prompts.user_id = users.id
+        WHERE prompts.id = #{results.first["id"].to_i}
+      SQL
+    )
+    result = updatedPrompt.first
     body = nil
     if (result["body"] != "NULL") then body = result["body"] end
+    user = {
+      username: result["username"],
+      id: result["user_id"].to_i
+    }
     return {
       id: result["id"].to_i,
       title: result["title"],
       body: body,
-      user_id: result["user_id"].to_i
+      user: user
     }
   end
 

@@ -53,11 +53,12 @@ class Main extends React.Component {
         'Content-Type': 'application/json'
       }
     })
-      .then(updatedPrompt => {
+      .then(updatedPrompt => {return updatedPrompt.json()})
+      .then(jsonedPrompt => {
         this.props.handleView('index')
         this.setState(prevState => {
           let index = prevState.prompts.findIndex(eachPrompt => eachPrompt.id === prompt.id)
-          prevState.prompts.splice(index, 1, prompt)
+          prevState.prompts.splice(index, 1, jsonedPrompt)
           return {prompts: prevState.prompts}
         })
       })
