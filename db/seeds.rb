@@ -9,7 +9,7 @@
 Prompt.create({
   "title" => "A classic fic prompt: Two people, one bed. Go.",
   "body" => "Guess we have to share the bed... Haha just kidding... Unless...",
-  "user_id" => 2})
+  "user_id" => 5})
 
 Prompt.create({
   "title" => "Go on a walk and write a short story about the first person you see.",
