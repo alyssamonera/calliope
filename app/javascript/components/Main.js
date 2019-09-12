@@ -132,7 +132,9 @@ class Main extends React.Component {
                   handleView={this.props.handleView} />)}
               </div>
             : this.props.view === 'login'
-              ? <LogIn />
+              ? <LogIn
+                  setUser={this.props.setUser}
+                  setAuthStatus={this.props.setAuthStatus} />
               : this.props.view === 'signup'
                 ? <SignUp addUser={this.addUser} />
                 : <Form

@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import { Auth } from 'aws-amplify'
 
 class LogIn extends Component{
   constructor(){
@@ -9,9 +10,18 @@ class LogIn extends Component{
     }
   }
 
-  handleSubmit = (event) => {
+  handleSubmit = async event => {
     event.preventDefault()
-    console.log(this.state);
+
+    try {
+      const user = await Auth.signIn(this.state.username, this.state.password)
+      this.props.setUser(user)
+      this.props.setAuthStatus(true)
+
+    } catch (error) {
+      console.log(error)
+    }
+
   }
 
   handleChange = (event) => {

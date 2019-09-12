@@ -18,6 +18,10 @@ class App extends React.Component{
         body: null,
         user_id: null,
         id: null
+      },
+      currentUser: {
+        isAuthenticated: false,
+        user: null
       }
     }
   }
@@ -61,14 +65,28 @@ class App extends React.Component{
     })
   }
 
+  setAuthStatus = (authenticated) => {
+    this.setState({ currentUser: {isAuthenticated: authenticated }})
+  }
+
+  setUser = (user) => {
+    this.setState({ currentUser: {user: user} })
+    this.handleView('index')
+  }
+
   render(){
     return (
       <div>
-        <Header handleView={this.handleView} />
+        <Header
+        handleView={this.handleView}
+        currentUser={this.state.currentUser} />
         <Main
           view={this.state.view}
           currentPrompt={this.state.currentPrompt} handleView={this.handleView}
-          formInputs={this.state.formInputs} />
+          formInputs={this.state.formInputs}
+          currentUser={this.state.currentUser}
+          setAuthStatus={this.setAuthStatus}
+          setUser={this.setUser} />
       </div>
     )
   }
