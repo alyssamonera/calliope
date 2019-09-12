@@ -29,10 +29,12 @@ class SignUp extends Component {
             email: email
           }
         })
-        this.props.handleView('index')
-        alert("A verification email has just been sent. Please check your email and click the link inside.")
+        this.props.addUser(this.state)
       } catch (error) {
         console.log(error)
+        if (error.code === "UsernameExistsException"){
+          alert("Sorry, that userame already exists.")
+        }
       }
 
     } else {

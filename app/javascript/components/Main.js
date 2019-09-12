@@ -13,6 +13,10 @@ class Main extends React.Component {
     }
   }
 
+  // ==============
+  //    PROMPTS
+  // ==============
+
   fetchPrompts = () => {
     fetch('/prompts')
       .then(data => data.json())
@@ -78,9 +82,37 @@ class Main extends React.Component {
       .catch(err => console.log(err))
   }
 
+  // ==============
+  //     USERS
+  // ==============
+
+  addUser = (user) => {
+    fetch('/signup', {
+      body: JSON.stringify(user),
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(createdUser => {return createdUser.json()})
+      .then(jsonedUser => {
+        this.props.handleView('index')
+        alert("Please check your email for a verification link. (Don't forget to check the spam folder!)")
+      })
+  }
+
+  // ==============
+  //   LIFE CYCLE
+  // ==============
+
   componentDidMount() {
     this.fetchPrompts()
   }
+
+  // ==============
+  //    RENDER
+  // ==============
 
   render(){
     return (
@@ -102,7 +134,7 @@ class Main extends React.Component {
             : this.props.view === 'login'
               ? <LogIn />
               : this.props.view === 'signup'
-                ? <SignUp handleView={this.props.handleView} />
+                ? <SignUp addUser={this.addUser} />
                 : <Form
                   addPrompt={this.addPrompt}
                   updatePrompt={this.updatePrompt}
