@@ -2,7 +2,8 @@ import React from 'react'
 import Form from './Form.js'
 import Prompt from './Prompt.js'
 import Show from './Show.js'
-import AuthPage from './AuthPage.js'
+import LogIn from './LogIn.js'
+import SignUp from './SignUp.js'
 
 class Main extends React.Component {
   constructor(){
@@ -99,13 +100,15 @@ class Main extends React.Component {
                   handleView={this.props.handleView} />)}
               </div>
             : this.props.view === 'login'
-              ? <AuthPage />
-              : <Form
-                addPrompt={this.addPrompt}
-                updatePrompt={this.updatePrompt}
-                className="new-prompt"
-                formInputs={this.props.formInputs}
-                view={this.props.view} />
+              ? <LogIn />
+              : this.props.view === 'signup'
+                ? <SignUp handleView={this.props.handleView} />
+                : <Form
+                  addPrompt={this.addPrompt}
+                  updatePrompt={this.updatePrompt}
+                  className="new-prompt"
+                  formInputs={this.props.formInputs}
+                  view={this.props.view} />
         }
       </main>
     )
