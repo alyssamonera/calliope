@@ -6,7 +6,7 @@ class Form extends Component {
     this.state = {
       title: "",
       body: "",
-      user_id: 1
+      user: null
     }
   }
 
@@ -29,7 +29,7 @@ class Form extends Component {
     this.setState({
       title: this.props.formInputs.title,
       body: this.props.formInputs.body,
-      user_id: this.props.formInputs.user_id,
+      user: this.props.formInputs.user,
       id: this.props.formInputs.id
     })
   }
@@ -50,10 +50,7 @@ class Form extends Component {
         <label htmlFor="body">Body</label>
         <textarea rows="10" cols="120" placeholder="body" value={this.state.body} id="body" onChange={this.handleChange} />
 
-        <label htmlFor="user_id">User ID (temporary)</label>
-        <input type="number" placeholder="user id" value={this.state.user_id} id="user_id" onChange={this.handleChange}/>
-
-        <input type="submit" value="Add prompt" />
+        <input type="submit" value={this.props.view === "addPage" ? "Add prompt" : "Submit edits"} />
 
       </form>
     )

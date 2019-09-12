@@ -121,7 +121,8 @@ class Main extends React.Component {
           ? <Show
             prompt={this.props.currentPrompt}
             deletePrompt={this.deletePrompt}
-            handleView={this.props.handleView} />
+            handleView={this.props.handleView}
+            currentUser={this.props.currentUser} />
           : this.props.view === 'index'
             ? <div>
                 <h3> Prompts </h3>

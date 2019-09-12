@@ -15,7 +15,7 @@ class Prompt extends Component {
 
           {/* AUTHOR */}
           <p className="blockquote-footer text-muted byline">
-            {this.props.prompt.user_id}
+            {this.props.prompt.user.username}
           </p>
 
         </blockquote>

@@ -10,13 +10,13 @@ class App extends React.Component{
       formInputs: {
         title: null,
         body: null,
-        user_id: null,
+        user: null,
         id: null
       },
       currentPrompt: {
         title: null,
         body: null,
-        user_id: null,
+        user: null,
         id: null
       },
       currentUser: {
@@ -27,16 +27,20 @@ class App extends React.Component{
   }
 
   handleView = (view, prompt) => {
+    let user = {username: null}
+    if (this.state.currentUser.user){
+      user = {username: this.state.currentUser.user.username}
+    }
     let formInputs = {
       title: '',
       body: '',
-      user_id: 1,
+      user: user,
       id: null
     }
     let currentPrompt = {
       title: '',
       body: '',
-      user_id: null,
+      user: null,
       id: null
     }
     let currentUser = this.state.currentUser
@@ -45,7 +49,7 @@ class App extends React.Component{
         currentPrompt = {
           title: prompt.title,
           body: prompt.body,
-          user_id: prompt.user_id,
+          user: prompt.user,
           id: prompt.id
         }
         break;
@@ -53,7 +57,7 @@ class App extends React.Component{
         formInputs = {
           title: prompt.title,
           body: prompt.body,
-          user_id: prompt.user_id,
+          user: prompt.user,
           id: prompt.id
         }
       default:

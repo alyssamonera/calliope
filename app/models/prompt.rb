@@ -8,29 +8,55 @@ class Prompt
     end
 
   def self.all
-    results = DB.exec("SELECT * FROM prompts ORDER BY id DESC;")
+    results = DB.exec(
+      <<-SQL
+        SELECT
+          prompts.*,
+          users.username
+        FROM prompts LEFT JOIN users
+        ON prompts.user_id = users.id
+        ORDER BY prompts.id DESC;
+        SQL
+      )
     return results.map do |result|
       body = nil
       if (result["body"] != "NULL") then body = result["body"] end
+      user = {
+        id: result["user_id"].to_i,
+        username: result["username"]
+      }
       {
         id: result["id"].to_i,
         title: result["title"],
         body: body,
-        user_id: result["user_id"].to_i
+        user: user
       }
     end
   end
 
   def self.find(id)
-    results = DB.exec("SELECT * FROM prompts WHERE id = #{id}")
+    results = DB.exec(
+      <<-SQL
+      SELECT
+        prompts.*,
+        users.username
+      FROM prompts LEFT JOIN users
+      ON prompts.user_id = users.id
+      WHERE prompts.id = 7;
+      SQL
+    )
     result = results.first
     body = nil
     if (result["body"] != "NULL") then body = result["body"] end
+    user = {
+      id: result["user_id"].to_i,
+      username: result["username"]
+    }
     return {
       id: result["id"].to_i,
       title: result["title"],
       body: body,
-      user_id: result["user_id"].to_i
+      user: user
     }
   end
 
