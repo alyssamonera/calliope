@@ -9,4 +9,10 @@ class RepliesController < ApplicationController
     render json: Reply.find(params["id"])
   end
 
+  def create
+    params["reply"]["title"].gsub! "'", "''"
+    params["reply"]["body"].gsub! "'", "''"
+    render json: Reply.create(params["reply"])
+  end
+
 end

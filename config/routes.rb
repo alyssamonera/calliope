@@ -17,5 +17,6 @@ Rails.application.routes.draw do
   # RESTFUL routes for REPLIES
   get '/prompts/:promptId/replies', to: 'replies#index'
   get '/replies/:id', to: 'replies#show'
+  post '/replies', to: 'replies#create'
 
 end
