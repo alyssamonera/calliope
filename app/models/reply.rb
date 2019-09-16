@@ -87,4 +87,9 @@ class Reply
     }
   end
 
+  def self.delete id
+    results = DB.exec("DELETE FROM replies WHERE id = #{id}")
+    return {deleted: true}
+  end
+
 end

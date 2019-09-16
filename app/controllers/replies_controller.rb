@@ -15,4 +15,8 @@ class RepliesController < ApplicationController
     render json: Reply.create(params["reply"])
   end
 
+  def delete
+    render json: Reply.delete(params["id"])
+  end
+
 end

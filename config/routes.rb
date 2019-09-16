@@ -18,5 +18,6 @@ Rails.application.routes.draw do
   get '/prompts/:promptId/replies', to: 'replies#index'
   get '/replies/:id', to: 'replies#show'
   post '/replies', to: 'replies#create'
+  delete '/replies/:id', to: 'replies#delete'
 
 end
