@@ -19,4 +19,10 @@ class RepliesController < ApplicationController
     render json: Reply.delete(params["id"])
   end
 
+  def update
+    params["reply"]["title"].gsub! "'", "''"
+    params["reply"]["body"].gsub! "'", "''"
+    render json: Reply.update(params["id"], params["reply"])
+  end
+
 end

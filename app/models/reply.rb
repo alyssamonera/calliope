@@ -16,17 +16,18 @@ class Reply
         WHERE prompt_id = #{promptId}
       SQL
     )
-    result = results.first
-    user = {
-      id: result["user_id"].to_i,
-      username: result["username"]
-    }
-    return {
-      id: result["id"].to_i,
-      title: result["title"],
-      body: result["body"],
-      user: user
-    }
+    return results.map do |result|
+      user = {
+        id: result["user_id"].to_i,
+        username: result["username"]
+      }
+      {
+        id: result["id"].to_i,
+        title: result["title"],
+        body: result["body"],
+        user: user
+      }
+    end
   end
 
   def self.find id
@@ -90,6 +91,38 @@ class Reply
   def self.delete id
     results = DB.exec("DELETE FROM replies WHERE id = #{id}")
     return {deleted: true}
+  end
+
+  def self.update (id, opts)
+    results = DB.exec(
+      <<-SQL
+        UPDATE replies
+        SET
+          title = '#{opts["title"]}',
+          body = '#{opts["body"]}'
+        WHERE id = #{id}
+        RETURNING id, title, body, user_id
+      SQL
+    )
+    updatedReply = DB.exec(
+      <<-SQL
+        SELECT replies.*, users.username
+        FROM replies LEFT JOIN users
+        ON replies.user_id = users.id
+        WHERE replies.id = #{results.first["id"].to_i}
+      SQL
+    )
+    result = updatedReply.first
+    user = {
+      id: result["user_id"],
+      username: result["username"]
+    }
+    return {
+      id: result["id"].to_i,
+      title: result["title"],
+      body: result["body"],
+      user: user
+    }
   end
 
 end

@@ -19,5 +19,6 @@ Rails.application.routes.draw do
   get '/replies/:id', to: 'replies#show'
   post '/replies', to: 'replies#create'
   delete '/replies/:id', to: 'replies#delete'
+  put '/replies/:id', to: 'replies#update'
 
 end
