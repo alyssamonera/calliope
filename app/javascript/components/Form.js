@@ -42,15 +42,31 @@ class Form extends Component {
   componentDidMount() {
     let action
     let postType
+    let title = ""
+    let body = ""
+    let id = null
+    let prompt_id = null
+    // ADD OR EDIT?
     if (window.location.href.includes("/new")){
       action = "Add"
-    } else { action = "Edit" }
+    } else {
+      action = "Edit"
+      let post = localStorage.getItem("currentPost")
+      let parsedPost = JSON.parse(post)
+      title = parsedPost.title
+      body = parsedPost.body
+      id = parsedPost.id
+    }
+    // PROMPT OR REPLY?
     if (window.location.href.includes("prompt")){
       postType = "prompt"
     } else {postType = "reply"}
     this.setState({
       action: action,
-      postType: postType
+      postType: postType,
+      title: title,
+      body: body,
+      id: id
     })
   }
 

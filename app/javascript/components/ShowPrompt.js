@@ -2,6 +2,16 @@ import React, {Component} from 'react'
 import Reply from './Reply.js'
 
 class ShowPrompt extends Component {
+
+  prepareEdit = (event) => {
+    event.preventDefault()
+
+    let jsonedPrompt = JSON.stringify(this.props.prompt)
+    localStorage.setItem("currentPost", jsonedPrompt)
+    window.location.href = '/edit/prompt'
+
+  }
+
   render(){
     return (
       <div className="prompt-show">
@@ -23,8 +33,8 @@ class ShowPrompt extends Component {
             ? this.props.currentUser.user.username === this.props.prompt.user.username
               ?
                 <div>
-                  <button className="btn btn-light">
-                    Edit
+                  <button className="btn btn-light" onClick={this.prepareEdit}>
+                      Edit
                   </button>
 
                   <button className="btn btn-light">

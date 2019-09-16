@@ -22,7 +22,8 @@ class Index extends Component {
         title: this.props.prompts[index].title,
         body: this.props.prompts[index].body,
         user: this.props.prompts[index].user,
-        replies: this.props.prompts[index].replies
+        replies: this.props.prompts[index].replies,
+        id: this.props.prompts[index].id
       }
     })
   }
@@ -33,7 +34,8 @@ class Index extends Component {
         title: null,
         body: null,
         user: null,
-        replies: []
+        replies: [],
+        id: null
       }
     })
   }
