@@ -74,25 +74,58 @@ class Prompt
       <<-SQL
       SELECT
         prompts.*,
-        users.username
-      FROM prompts LEFT JOIN users
-      ON prompts.user_id = users.id
-      WHERE prompts.id = 7;
+        prompt_author.username AS prompt_author,
+        prompt_author.id AS prompt_author_id,
+        reply_author.username AS reply_author,
+        reply_author.id AS reply_author_id,
+        replies.title AS reply_title,
+        replies.body AS reply_body,
+        replies.id AS reply_id
+      FROM
+        prompts LEFT JOIN users AS prompt_author
+      ON
+        prompts.user_id = prompt_author.id
+      LEFT JOIN replies
+      ON
+        replies.prompt_id = prompts.id
+      LEFT JOIN users AS reply_author
+      ON
+        replies.user_id = reply_author.id
+      WHERE prompts.id = #{id}
+      ORDER BY replies.id DESC;
       SQL
     )
-    result = results.first
+    replies = []
+    results.map do |result|
+      if (result["reply_id"])
+        user = {
+          id: result["reply_author_id"],
+          username: result["reply_author"]
+        }
+        reply = {
+          id: result["reply_id"],
+          title: result["reply_title"],
+          body: result["reply_body"],
+          user: user
+        }
+        replies.push(reply)
+      end
+    end
+    prompt = results.first
     body = nil
-    if (result["body"] != "NULL") then body = result["body"] end
+    if (prompt["body"] != "NULL") then body = prompt["body"] end
     user = {
-      id: result["user_id"].to_i,
-      username: result["username"]
+      id: prompt["prompt_author_id"].to_i,
+      username: prompt["prompt_author"]
     }
-    return {
-      id: result["id"].to_i,
-      title: result["title"],
+    prompt = {
+      id: results.first["id"].to_i,
+      title: results.first["title"],
       body: body,
-      user: user
+      user: user,
+      replies: replies
     }
+    return prompt
   end
 
   def self.create(opts)

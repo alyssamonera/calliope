@@ -2,10 +2,10 @@ import React from 'react'
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import Index from './PromptIndex.js'
 import Form from './Form.js'
-import Prompt from './Prompt.js'
-import Show from './ShowPrompt.js'
 import LogIn from './LogIn.js'
 import SignUp from './SignUp.js'
+import ShowPrompt from './ShowPrompt.js'
+import ShowReply from './ShowReply.js'
 
 class Main extends React.Component {
   constructor(){
@@ -95,6 +95,10 @@ class Main extends React.Component {
   //    RENDER
   // ==============
 
+  // {this.state.currentPrompt.title
+  //   ?
+  //   :
+
   render(){
     const promptOpts = {
       addPrompt: this.addPrompt,
@@ -116,13 +120,20 @@ class Main extends React.Component {
                 prompts={this.state.prompts} currentUser={this.props.currentUser}
                 deletePrompt={this.deletePrompt} {...props} />} />
 
-            <Route path={["/new/prompt", "/edit/prompt", "/new/reply", "/edit/reply"]} render={(props) =>
+            <Route path={["/new/prompt", "/edit/prompt/", "/new/reply", "/edit/reply"]} render={(props) =>
               <Form promptOpts={promptOpts} viewOpts={viewOpts}
                 {...props} />} />
 
             <Route exact path="/login" render={(props) =>
               <LogIn setAuth={this.props.setAuth} viewOpts={viewOpts}
                 {...props} />} />
+
+            <Route path="/prompts/:id" render={(props) =>
+              <ShowPrompt currentUser={this.props.currentUser} deletePrompt={this.props.deletePrompt} {...props} />
+              }/>
+
+            <Route path="/replies/:id" render={(props) =>
+              <ShowReply currentUser={this.props.currentUser} {...props} /> } />
 
           </Switch>
         </div>

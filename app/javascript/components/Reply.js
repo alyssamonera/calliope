@@ -29,7 +29,9 @@ class Reply extends Component {
     return (
       <div className="reply">
         <h4>
-          {this.props.reply.title}
+          <a href={"/replies/" + this.props.reply.id}>
+            {this.props.reply.title}
+          </a>
         </h4>
 
         <p className="text-muted byline">
