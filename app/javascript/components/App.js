@@ -23,10 +23,14 @@ class App extends React.Component{
         isAuthenticated: false,
         user: null,
         id: null
-      }
+      },
+      currentReplies: []
     }
   }
 
+  // ===============
+  //  HANDLE VIEW
+  // ===============
   handleView = (view, prompt) => {
     let formInputs = {
       title: '',
@@ -66,6 +70,9 @@ class App extends React.Component{
     })
   }
 
+  // ===============
+  // AUTHENTICATION
+  // ===============
   setAuth = (authenticated, user) => {
     if (authenticated){
       fetch(`/login/${user.username}`)
@@ -104,7 +111,8 @@ class App extends React.Component{
           currentPrompt={this.state.currentPrompt} handleView={this.handleView}
           formInputs={this.state.formInputs}
           currentUser={this.state.currentUser}
-          setAuth={this.setAuth} />
+          setAuth={this.setAuth}
+          fetchReplies={this.fetchReplies} />
       </div>
     )
   }

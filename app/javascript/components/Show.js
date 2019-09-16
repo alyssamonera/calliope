@@ -27,8 +27,9 @@ class Show extends Component {
                 </div>
               : ""
             : ""}
-
         </div>
+
+        
 
       </div>
     )
