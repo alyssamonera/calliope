@@ -6,7 +6,7 @@ class Prompt extends Component {
       <div>
         <blockquote
           className="blockquote one-prompt"
-          onClick={() => {this.props.handleView('show', this.props.prompt)}} >
+          onClick={() => {this.props.handleView('showPrompt', this.props.prompt)}} >
 
           {/* TITLE */}
           <p className="mb-0">

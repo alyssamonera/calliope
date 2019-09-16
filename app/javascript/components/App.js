@@ -25,13 +25,20 @@ class App extends React.Component{
         user: null,
         id: null
       },
+      currentReply: {
+        title: null,
+        body: null,
+        user: null,
+        prompt: null,
+        id: null
+      }
     }
   }
 
   // ===============
   //  HANDLE VIEW
   // ===============
-  handleView = (view, prompt) => {
+  handleView = (view, body) => {
     let formInputs = {
       title: '',
       body: '',
@@ -42,32 +49,61 @@ class App extends React.Component{
       title: '',
       body: '',
       user: null,
+      replies: null,
+      id: null
+    }
+    let currentReply = {
+      title: '',
+      body: '',
+      user: null,
+      prompt: null,
       id: null
     }
     switch (view){
-      case 'show':
+      case 'showPrompt':
         currentPrompt = {
-          title: prompt.title,
-          body: prompt.body,
-          user: prompt.user,
-          replies: prompt.replies,
-          id: prompt.id
+          title: body.title,
+          body: body.body,
+          user: body.user,
+          replies: body.replies,
+          id: body.id
         }
         break;
-      case 'editPage':
+      case 'editPrompt':
         formInputs = {
-          title: prompt.title,
-          body: prompt.body,
-          user_id: prompt.user.id,
-          id: prompt.id
+          title: body.title,
+          body: body.body,
+          user_id: body.user.id,
+          replies: body.replies,
+          id: body.id
         }
+        break;
+      case 'showReply':
+        currentReply = {
+          title: body.title,
+          body: body.body,
+          user: body.user,
+          prompt: body.prompt,
+          id: body.id
+        }
+        break;
+      case 'editReply':
+        formInputs = {
+          title: body.title,
+          body: body.body,
+          user_id: body.user.id,
+          prompt: body.prompt,
+          id: body.id
+        }
+        break;
       default:
         break;
     }
     this.setState({
       view: view,
       formInputs: formInputs,
-      currentPrompt: currentPrompt
+      currentPrompt: currentPrompt,
+      currentReply: currentReply
     })
   }
 

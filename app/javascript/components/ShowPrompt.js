@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import Reply from './Reply.js'
 
-class Show extends Component {
+class ShowPrompt extends Component {
   render(){
     return (
       <div className="prompt-show">
@@ -32,7 +32,11 @@ class Show extends Component {
 
         <div className="prompt-responses">
           {this.props.prompt.replies.map(reply =>
-            <Reply key={reply.id} reply={reply} />)}
+            <Reply
+              key={reply.id}
+              reply={reply}
+              prompt={this.props.prompt}
+              handleView={this.props.handleView} />)}
         </div>
 
       </div>
@@ -40,4 +44,4 @@ class Show extends Component {
   }
 }
 
-export default Show
+export default ShowPrompt

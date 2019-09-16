@@ -1,7 +1,9 @@
 import React from 'react'
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
+import Index from './PromptIndex.js'
 import Form from './Form.js'
 import Prompt from './Prompt.js'
-import Show from './Show.js'
+import Show from './ShowPrompt.js'
 import LogIn from './LogIn.js'
 import SignUp from './SignUp.js'
 
@@ -117,37 +119,13 @@ class Main extends React.Component {
 
   render(){
     return (
-      <main className={this.props.view === 'index' ? "prompt-index" : ""}>
-        {this.props.currentPrompt.title
-          ? <Show
-            prompt={this.props.currentPrompt}
-            deletePrompt={this.deletePrompt}
-            handleView={this.props.handleView}
-            currentUser={this.props.currentUser} />
-          : this.props.view === 'index'
-            ? <div>
-                <h3> Prompts </h3>
-                {this.state.prompts.map(prompt =>
-                <Prompt
-                  prompt={prompt}
-                  key={prompt.id}
-                  handleView={this.props.handleView} />)}
-              </div>
-            : this.props.view === 'login'
-              ? <LogIn
-                  setAuth={this.props.setAuth} />
-              : this.props.view === 'signup'
-                ? <SignUp addUser={this.addUser} />
-                : <Form
-                    addPrompt={this.addPrompt}
-                    updatePrompt={this.updatePrompt}
-                    className="new-prompt"
-                    formInputs={this.props.formInputs}
-                    view={this.props.view}
-                    currentUser={this.props.currentUser}
-                    handleView={this.props.handleView} />
-        }
-      </main>
+      <Router>
+        <div>
+          <Switch>
+            <Route exact path="/" render={() => <Index handleView={this.props.handleView} prompts={this.state.prompts} />} />
+          </Switch>
+        </div>
+      </Router>
     )
   }
 }
