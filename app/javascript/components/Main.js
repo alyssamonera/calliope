@@ -113,7 +113,8 @@ class Main extends React.Component {
 
             <Route exact path="/" render={(props) =>
               <Index
-                prompts={this.state.prompts} currentUser={this.props.currentUser} {...props} />} />
+                prompts={this.state.prompts} currentUser={this.props.currentUser}
+                deletePrompt={this.deletePrompt} {...props} />} />
 
             <Route path={["/new/prompt", "/edit/prompt", "/new/reply", "/edit/reply"]} render={(props) =>
               <Form promptOpts={promptOpts} viewOpts={viewOpts}

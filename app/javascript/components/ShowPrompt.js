@@ -37,7 +37,9 @@ class ShowPrompt extends Component {
                       Edit
                   </button>
 
-                  <button className="btn btn-light">
+                  <button
+                    className="btn btn-light"
+                    onClick={()=>{this.props.deletePrompt(this.props.prompt.id)}}>
                     Delete
                   </button>
                 </div>

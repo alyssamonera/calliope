@@ -44,7 +44,7 @@ class Index extends Component {
     return (
       <main className="prompt-index">
         {this.state.currentPrompt.title
-          ? <ShowPrompt prompt={this.state.currentPrompt} currentUser={this.props.currentUser} backToIndex={this.backToIndex} />
+          ? <ShowPrompt prompt={this.state.currentPrompt} currentUser={this.props.currentUser} backToIndex={this.backToIndex} deletePrompt={this.props.deletePrompt} />
           : this.props.prompts.map(prompt =>
             <Prompt key={prompt.id} prompt={prompt} id={prompt.id} showPrompt={this.showPrompt} />)}
       </main>
