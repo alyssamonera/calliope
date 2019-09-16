@@ -5,4 +5,8 @@ class RepliesController < ApplicationController
     render json: Reply.all(params["promptId"])
   end
 
+  def show
+    render json: Reply.find(params["id"])
+  end
+
 end
