@@ -128,9 +128,10 @@ class Main extends React.Component {
       <Router>
         <div>
           <Switch>
-            <Route exact path="/" render={() => <Index
-              prompts={this.state.prompts} />} />
-            <Route exact path="/new/prompt" render={() => <Form promptOpts={promptOpts} viewOpts={viewOpts} />} />
+            <Route exact path="/" render={(props) => <Index
+              prompts={this.state.prompts} {...props} />} />
+            <Route exact path="/new/prompt" render={(props) => <Form promptOpts={promptOpts} viewOpts={viewOpts} {...props} />} />
+            <Route exact path="/login" render={(props) => <LogIn setAuth={this.props.setAuth} {...props} />} />
           </Switch>
         </div>
       </Router>

@@ -8,8 +8,8 @@ class App extends React.Component{
     this.state = {
       view: 'index',
       formInputs: {
-        title: null,
-        body: null,
+        title: '',
+        body: '',
         user_id: null,
         id: null
       },

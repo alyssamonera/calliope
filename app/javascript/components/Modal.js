@@ -2,26 +2,18 @@ import React, {Component} from 'react'
 
 class Modal extends Component {
 
-  handleRedirect = (event) => {
-    event.preventDefault()
-  }
-
   render(){
     return (
       <div className="my-modal">
         <div className="my-modal-textbox">
           <h3>Hold up!</h3>
           <p>You need to log in to do that.</p>
-          <button
-            className="btn btn-light"
-            id="login"
-            onClick={this.handleRedirect}>
+          <button className="btn btn-light">
+            <a href="/login">
               Log In
+            </a>
           </button>
-          <button
-            className="btn btn-dark"
-            id="signup"
-            onClick={this.handleRedirect}>
+          <button className="btn btn-dark">
               Sign Up
           </button>
         </div>

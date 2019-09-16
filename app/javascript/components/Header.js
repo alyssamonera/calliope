@@ -35,7 +35,9 @@ class Header extends Component {
                 </button>
               : <div>
                   <button className="btn btn-dark">
+                    <a href="/login">
                       Log In
+                    </a>
                   </button>
                   <button className="btn btn-dark">
                       Sign Up
