@@ -36,13 +36,7 @@ class Main extends React.Component {
         'Content-Type': 'application/json'
       }
     })
-      .then(createdPrompt => {return createdPrompt.json()})
-      .then(jsonedPrompt => {
-        this.setState(prevState => {
-          prevState.prompts.unshift(jsonedPrompt)
-          return {prompts: prevState.prompts}
-        })
-      })
+      .then(window.location.href="/")
   }
 
   updatePrompt = (prompt) => {
@@ -54,14 +48,7 @@ class Main extends React.Component {
         'Content-Type': 'application/json'
       }
     })
-      .then(updatedPrompt => {return updatedPrompt.json()})
-      .then(jsonedPrompt => {
-        this.setState(prevState => {
-          let index = prevState.prompts.findIndex(eachPrompt => eachPrompt.id === prompt.id)
-          prevState.prompts.splice(index, 1, jsonedPrompt)
-          return {prompts: prevState.prompts}
-        })
-      })
+      .then(window.location.href="/")
       .catch(err => console.log(err))
   }
 
@@ -73,12 +60,7 @@ class Main extends React.Component {
         'Content-Type': 'application/json'
       }
     })
-      .then(data => {
-        this.setState(prevState => {
-          const prompts = prevState.prompts.filter(prompt => prompt.id !== id)
-          return {prompts}
-        })
-      })
+      .then(window.location.href="/")
       .catch(err => console.log(err))
   }
 
@@ -131,7 +113,7 @@ class Main extends React.Component {
             <Route exact path="/" render={(props) => <Index
               prompts={this.state.prompts} {...props} />} />
             <Route exact path="/new/prompt" render={(props) => <Form promptOpts={promptOpts} viewOpts={viewOpts} {...props} />} />
-            <Route exact path="/login" render={(props) => <LogIn setAuth={this.props.setAuth} {...props} />} />
+            <Route exact path="/login" render={(props) => <LogIn setAuth={this.props.setAuth} viewOpts={viewOpts} {...props} />} />
           </Switch>
         </div>
       </Router>

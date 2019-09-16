@@ -7,6 +7,9 @@ class Form extends Component {
     this.state = {
       title: "",
       body: "",
+      action: null,
+      postType: null,
+      prompt_id: null
     }
   }
 
@@ -16,21 +19,38 @@ class Form extends Component {
     })
   }
 
-  handleSubmit = (event) => {
+  handleSubmit = async (event) => {
     event.preventDefault()
-    if (this.props.viewOpts.view === "addPage") {
-      this.props.promptOpts.addPrompt(this.state)
+    const state = await this.setState({
+      user_id: this.props.viewOpts.currentUser.id
+    })
+    if (this.state.action === "Add") {
+      if (this.state.postType === "prompt"){
+        this.props.promptOpts.addPrompt(this.state)
+      } else {
+        console.log("adding reply...");
+      }
     } else {
-      this.props.promptOpts.updatePrompt(this.state)
+      if (this.state.postType === "prompt"){
+        this.props.promptOpts.updatePrompt(this.state)
+      } else {
+        console.log("updating reply...");
+      }
     }
   }
 
   componentDidMount() {
+    let action
+    let postType
+    if (window.location.href.includes("/new")){
+      action = "Add"
+    } else { action = "Edit" }
+    if (window.location.href.includes("prompt")){
+      postType = "prompt"
+    } else {postType = "reply"}
     this.setState({
-      title: this.props.promptOpts.formInputs.title,
-      body: this.props.promptOpts.formInputs.body,
-      user_id: this.props.promptOpts.formInputs.user_id,
-      id: this.props.promptOpts.formInputs.id
+      action: action,
+      postType: postType
     })
   }
 
@@ -39,9 +59,7 @@ class Form extends Component {
       <form onSubmit={this.handleSubmit} className="prompt-form">
 
         <h1>
-          {this.props.viewOpts.view === "addPage"
-            ? "Add a new prompt"
-            : "Edit your prompt"}
+          {this.state.action} your {this.state.postType}
         </h1>
 
         <label htmlFor="title">Title</label>
@@ -50,9 +68,9 @@ class Form extends Component {
         <label htmlFor="body">Body</label>
         <textarea rows="10" cols="120" placeholder="body" value={this.state.body} id="body" onChange={this.handleChange} />
 
-        <input type="submit" className="btn btn-dark" value={this.props.viewOpts.view === "addPage" ? "Add prompt" : "Submit edits"} />
+        <input type="submit" className="btn btn-dark" value={this.state.action === "Add" ? "Add prompt" : "Submit edits"} />
 
-        {this.props.viewOpts.currentUser.id ? "" : <Modal />}
+        {this.props.viewOpts.currentUser.id ? "" : <Modal handleView={this.props.viewOpts.handleView} />}
 
       </form>
     )
