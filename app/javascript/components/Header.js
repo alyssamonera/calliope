@@ -20,8 +20,10 @@ class Header extends Component {
     return (
       <header>
         <div className="title-bar">
-          <h1 onClick={() => {this.props.handleView('index')}}>
-            Calliope
+          <h1>
+            <a href="/">
+              Calliope
+            </a>
           </h1>
 
           <div className="title-links">
@@ -32,14 +34,10 @@ class Header extends Component {
                     Log Out ({this.props.currentUser.user.username})
                 </button>
               : <div>
-                  <button
-                    className="btn btn-dark"
-                    onClick={() => {this.props.handleView('login')}}>
+                  <button className="btn btn-dark">
                       Log In
                   </button>
-                  <button
-                    className="btn btn-dark"
-                    onClick={() => {this.props.handleView('signup')}}>
+                  <button className="btn btn-dark">
                       Sign Up
                   </button>
                 </div>
@@ -54,11 +52,15 @@ class Header extends Component {
             <li>
               About
             </li>
-            <li onClick={() => {this.props.handleView('index')}}>
-              Browse
+            <li>
+              <a href="/">
+                Browse
+              </a>
             </li>
-            <li onClick={() => {this.props.handleView('addPage')}}>
-              Create
+            <li>
+              <a href="/new/prompt">
+                Create
+              </a>
             </li>
           </ul>
         </nav>

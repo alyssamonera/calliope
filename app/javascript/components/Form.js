@@ -18,19 +18,19 @@ class Form extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault()
-    if (this.props.view === "addPage") {
-      this.props.addPrompt(this.state)
+    if (this.props.viewOpts.view === "addPage") {
+      this.props.promptOpts.addPrompt(this.state)
     } else {
-      this.props.updatePrompt(this.state)
+      this.props.promptOpts.updatePrompt(this.state)
     }
   }
 
   componentDidMount() {
     this.setState({
-      title: this.props.formInputs.title,
-      body: this.props.formInputs.body,
-      user_id: this.props.formInputs.user_id,
-      id: this.props.formInputs.id
+      title: this.props.promptOpts.formInputs.title,
+      body: this.props.promptOpts.formInputs.body,
+      user_id: this.props.promptOpts.formInputs.user_id,
+      id: this.props.promptOpts.formInputs.id
     })
   }
 
@@ -39,7 +39,7 @@ class Form extends Component {
       <form onSubmit={this.handleSubmit} className="prompt-form">
 
         <h1>
-          {this.props.view === "addPage"
+          {this.props.viewOpts.view === "addPage"
             ? "Add a new prompt"
             : "Edit your prompt"}
         </h1>
@@ -50,9 +50,9 @@ class Form extends Component {
         <label htmlFor="body">Body</label>
         <textarea rows="10" cols="120" placeholder="body" value={this.state.body} id="body" onChange={this.handleChange} />
 
-        <input type="submit" className="btn btn-dark" value={this.props.view === "addPage" ? "Add prompt" : "Submit edits"} />
+        <input type="submit" className="btn btn-dark" value={this.props.viewOpts.view === "addPage" ? "Add prompt" : "Submit edits"} />
 
-        {this.props.currentUser.id ? "" : <Modal handleView={this.props.handleView} />}
+        {this.props.viewOpts.currentUser.id ? "" : <Modal />}
 
       </form>
     )

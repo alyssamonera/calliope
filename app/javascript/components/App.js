@@ -36,78 +36,6 @@ class App extends React.Component{
   }
 
   // ===============
-  //  HANDLE VIEW
-  // ===============
-  handleView = (view, body) => {
-    let formInputs = {
-      title: '',
-      body: '',
-      user_id: this.state.currentUser.id,
-      id: null
-    }
-    let currentPrompt = {
-      title: '',
-      body: '',
-      user: null,
-      replies: null,
-      id: null
-    }
-    let currentReply = {
-      title: '',
-      body: '',
-      user: null,
-      prompt: null,
-      id: null
-    }
-    switch (view){
-      case 'showPrompt':
-        currentPrompt = {
-          title: body.title,
-          body: body.body,
-          user: body.user,
-          replies: body.replies,
-          id: body.id
-        }
-        break;
-      case 'editPrompt':
-        formInputs = {
-          title: body.title,
-          body: body.body,
-          user_id: body.user.id,
-          replies: body.replies,
-          id: body.id
-        }
-        break;
-      case 'showReply':
-        currentReply = {
-          title: body.title,
-          body: body.body,
-          user: body.user,
-          prompt: body.prompt,
-          id: body.id
-        }
-        break;
-      case 'editReply':
-        formInputs = {
-          title: body.title,
-          body: body.body,
-          user_id: body.user.id,
-          prompt: body.prompt,
-          id: body.id
-        }
-        break;
-      default:
-        break;
-    }
-    this.setState({
-      view: view,
-      formInputs: formInputs,
-      currentPrompt: currentPrompt,
-      currentReply: currentReply
-    })
-  }
-
-  // ===============
   // AUTHENTICATION
   // ===============
   setAuth = (authenticated, user) => {
@@ -122,7 +50,6 @@ class App extends React.Component{
               id: parseInt(jData.id)
             }
           })
-          this.handleView('index')
         })
     } else {
       this.setState({
@@ -132,7 +59,6 @@ class App extends React.Component{
           id: null
         }
       })
-      this.handleView('index')
     }
   }
 
@@ -140,12 +66,11 @@ class App extends React.Component{
     return (
       <div>
         <Header
-          handleView={this.handleView}
           currentUser={this.state.currentUser}
           setAuth={this.setAuth} />
         <Main
           view={this.state.view}
-          currentPrompt={this.state.currentPrompt} handleView={this.handleView}
+          currentPrompt={this.state.currentPrompt}
           formInputs={this.state.formInputs}
           currentUser={this.state.currentUser}
           setAuth={this.setAuth}

@@ -21,4 +21,6 @@ Rails.application.routes.draw do
   delete '/replies/:id', to: 'replies#delete'
   put '/replies/:id', to: 'replies#update'
 
+  get '*path', to: 'site#index'
+
 end

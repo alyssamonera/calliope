@@ -28,7 +28,7 @@ class Reply extends Component {
   render(){
     return (
       <div className="reply">
-        <h4 onClick={() => {this.props.handleView('showReply', this.state)}}>
+        <h4>
           {this.props.reply.title}
         </h4>
 

@@ -38,7 +38,6 @@ class Main extends React.Component {
     })
       .then(createdPrompt => {return createdPrompt.json()})
       .then(jsonedPrompt => {
-        this.props.handleView('index')
         this.setState(prevState => {
           prevState.prompts.unshift(jsonedPrompt)
           return {prompts: prevState.prompts}
@@ -57,7 +56,6 @@ class Main extends React.Component {
     })
       .then(updatedPrompt => {return updatedPrompt.json()})
       .then(jsonedPrompt => {
-        this.props.handleView('index')
         this.setState(prevState => {
           let index = prevState.prompts.findIndex(eachPrompt => eachPrompt.id === prompt.id)
           prevState.prompts.splice(index, 1, jsonedPrompt)
@@ -76,7 +74,6 @@ class Main extends React.Component {
       }
     })
       .then(data => {
-        this.props.handleView('index')
         this.setState(prevState => {
           const prompts = prevState.prompts.filter(prompt => prompt.id !== id)
           return {prompts}
@@ -100,7 +97,6 @@ class Main extends React.Component {
     })
       .then(createdUser => {return createdUser.json()})
       .then(jsonedUser => {
-        this.props.handleView('index')
         alert("Please check your email for a verification link. (Don't forget to check the spam folder!)")
       })
   }
@@ -118,11 +114,23 @@ class Main extends React.Component {
   // ==============
 
   render(){
+    const promptOpts = {
+      addPrompt: this.addPrompt,
+      updatePrompt: this.updatePrompt,
+      formInputs: this.props.formInputs
+    }
+    const viewOpts = {
+      view: this.props.view,
+      currentUser: this.props.currentUser,
+    }
+
     return (
       <Router>
         <div>
           <Switch>
-            <Route exact path="/" render={() => <Index handleView={this.props.handleView} prompts={this.state.prompts} />} />
+            <Route exact path="/" render={() => <Index
+              prompts={this.state.prompts} />} />
+            <Route exact path="/new/prompt" render={() => <Form promptOpts={promptOpts} viewOpts={viewOpts} />} />
           </Switch>
         </div>
       </Router>

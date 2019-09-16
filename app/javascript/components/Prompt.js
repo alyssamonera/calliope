@@ -4,9 +4,7 @@ class Prompt extends Component {
   render(){
     return (
       <div>
-        <blockquote
-          className="blockquote one-prompt"
-          onClick={() => {this.props.handleView('showPrompt', this.props.prompt)}} >
+        <blockquote className="blockquote one-prompt">
 
           {/* TITLE */}
           <p className="mb-0">

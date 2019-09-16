@@ -18,11 +18,11 @@ class ShowPrompt extends Component {
             ? this.props.currentUser.user.username === this.props.prompt.user.username
               ?
                 <div>
-                  <button onClick={() => {this.props.handleView('editPage', this.props.prompt)}} className="btn btn-light">
+                  <button className="btn btn-light">
                     Edit
                   </button>
 
-                  <button onClick={() => {this.props.deletePrompt(this.props.prompt.id)}} className="btn btn-light">
+                  <button className="btn btn-light">
                     Delete
                   </button>
                 </div>
@@ -35,8 +35,7 @@ class ShowPrompt extends Component {
             <Reply
               key={reply.id}
               reply={reply}
-              prompt={this.props.prompt}
-              handleView={this.props.handleView} />)}
+              prompt={this.props.prompt} />)}
         </div>
 
       </div>

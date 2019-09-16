@@ -4,7 +4,6 @@ class Modal extends Component {
 
   handleRedirect = (event) => {
     event.preventDefault()
-    this.props.handleView(event.target.id)
   }
 
   render(){

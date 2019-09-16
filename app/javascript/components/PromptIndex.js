@@ -6,7 +6,7 @@ class Index extends Component {
     return (
       <main className="prompt-index">
         {this.props.prompts.map(prompt =>
-          <Prompt key={prompt.id} prompt={prompt} handleView={this.props.handleView} />)}
+          <Prompt key={prompt.id} prompt={prompt} />)}
       </main>
     )
   }
