@@ -14,4 +14,7 @@ Rails.application.routes.draw do
   get '/login/:username', to: 'users#findId'
   post '/signup', to: 'users#create'
 
+  # RESTFUL routes for REPLIES
+  get '/prompts/:promptId/replies', to: 'replies#index'
+
 end
