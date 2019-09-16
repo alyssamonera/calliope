@@ -20,7 +20,7 @@ class Main extends React.Component {
   // ==============
 
   fetchPrompts = () => {
-    fetch('/prompts')
+    fetch('/api/prompts')
       .then(data => data.json())
       .then(jData => {
         this.setState({prompts: jData})
@@ -28,7 +28,7 @@ class Main extends React.Component {
   }
 
   addPrompt = (prompt) => {
-    fetch('/prompts', {
+    fetch('/api/prompts', {
       body: JSON.stringify(prompt),
       method: 'POST',
       headers: {
@@ -40,7 +40,7 @@ class Main extends React.Component {
   }
 
   updatePrompt = (prompt) => {
-    fetch(`/prompts/${prompt.id}`, {
+    fetch(`/api/prompts/${prompt.id}`, {
       body: JSON.stringify(prompt),
       method: 'PUT',
       headers: {
@@ -53,7 +53,7 @@ class Main extends React.Component {
   }
 
   deletePrompt = (id) => {
-    fetch(`/prompts/${id}`, {
+    fetch(`/api/prompts/${id}`, {
       method: 'DELETE',
       headers: {
         'Accept': 'application/json, text/plain, */*',
@@ -69,7 +69,7 @@ class Main extends React.Component {
   // ==============
 
   addUser = (user) => {
-    fetch('/signup', {
+    fetch('/api/signup', {
       body: JSON.stringify(user),
       method: 'POST',
       headers: {
@@ -111,7 +111,7 @@ class Main extends React.Component {
         <div>
           <Switch>
             <Route exact path="/" render={(props) => <Index
-              prompts={this.state.prompts} {...props} />} />
+              prompts={this.state.prompts} currentUser={this.props.currentUser} {...props} />} />
             <Route exact path="/new/prompt" render={(props) => <Form promptOpts={promptOpts} viewOpts={viewOpts} {...props} />} />
             <Route exact path="/login" render={(props) => <LogIn setAuth={this.props.setAuth} viewOpts={viewOpts} {...props} />} />
           </Switch>

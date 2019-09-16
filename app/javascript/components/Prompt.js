@@ -4,7 +4,9 @@ class Prompt extends Component {
   render(){
     return (
       <div>
-        <blockquote className="blockquote one-prompt">
+        <blockquote
+          className="blockquote one-prompt"
+          onClick={()=> {this.props.showPrompt(this.props.prompt.id)}}>
 
           {/* TITLE */}
           <p className="mb-0">

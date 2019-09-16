@@ -5,6 +5,11 @@ class ShowPrompt extends Component {
   render(){
     return (
       <div className="prompt-show">
+        <button
+          className="btn btn-dark"
+          onClick={this.props.backToIndex}>
+          Back
+        </button>
         <h1> {this.props.prompt.title} </h1>
         {this.props.prompt.body ? <p> {this.props.prompt.body} </p> : ""}
 

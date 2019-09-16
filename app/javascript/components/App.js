@@ -49,7 +49,7 @@ class App extends React.Component{
   // ===============
   setAuth = (authenticated, user) => {
     if (authenticated){
-      fetch(`/login/${user.username}`)
+      fetch(`/api/login/${user.username}`)
         .then(data => data.json())
         .then(jData => {
           this.setState({
