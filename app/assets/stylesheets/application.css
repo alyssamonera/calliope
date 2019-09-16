@@ -273,6 +273,40 @@ footer{
   border: 1px solid black;
 }
 
+/* RESPONSE SECTION */
+
+.prompt-responses{
+  margin: 1em;
+}
+
+.reply{
+  padding: 1em;
+  border: 1px solid #ccc;
+  border-radius: 1em;
+  margin-bottom: 1em;
+}
+
+.readmore{
+  color: var(--scarlet);
+}
+
+.readmore:hover{
+  color: #888;
+}
+
+.original-prompt{
+  text-align: center;
+}
+
+blockquote .note-video-clip{
+  width: 320px;
+  height: 180px
+}
+
+blockquote img{
+  width: 293px !important;
+}
+
 /* MODAL */
 
 .my-modal{

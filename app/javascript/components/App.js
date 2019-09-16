@@ -17,6 +17,7 @@ class App extends React.Component{
         title: null,
         body: null,
         user: null,
+        replies: null,
         id: null
       },
       currentUser: {
@@ -24,7 +25,6 @@ class App extends React.Component{
         user: null,
         id: null
       },
-      currentReplies: []
     }
   }
 
@@ -50,6 +50,7 @@ class App extends React.Component{
           title: prompt.title,
           body: prompt.body,
           user: prompt.user,
+          replies: prompt.replies,
           id: prompt.id
         }
         break;

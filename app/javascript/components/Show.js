@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import Reply from './Reply.js'
 
 class Show extends Component {
   render(){
@@ -29,7 +30,10 @@ class Show extends Component {
             : ""}
         </div>
 
-        
+        <div className="prompt-responses">
+          {this.props.prompt.replies.map(reply =>
+            <Reply key={reply.id} reply={reply} />)}
+        </div>
 
       </div>
     )
