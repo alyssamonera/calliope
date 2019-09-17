@@ -37,7 +37,7 @@ class Main extends React.Component {
         'Content-Type': 'application/json'
       }
     })
-      .then(window.location.href="/")
+      .then(data => {window.location.href="/browse"})
   }
 
   updatePrompt = (prompt) => {
@@ -49,7 +49,7 @@ class Main extends React.Component {
         'Content-Type': 'application/json'
       }
     })
-      .then(window.location.href="/")
+      .then(data => {window.location.href="/browse"})
       .catch(err => console.log(err))
   }
 
@@ -61,7 +61,7 @@ class Main extends React.Component {
         'Content-Type': 'application/json'
       }
     })
-      .then(window.location.href="/")
+      .then(data => {window.location.href="/browse"})
       .catch(err => console.log(err))
   }
 
@@ -176,7 +176,7 @@ class Main extends React.Component {
                 {...props} />} />
 
             <Route path="/prompts/:id" render={(props) =>
-              <ShowPrompt currentUser={this.props.currentUser} deletePrompt={this.props.deletePrompt} {...props} />
+              <ShowPrompt currentUser={this.props.currentUser} deletePrompt={this.deletePrompt} {...props} />
               }/>
 
             <Route path="/replies/:id" render={(props) =>

@@ -26,7 +26,8 @@ class ShowPrompt extends Component {
   }
 
   componentDidMount(){
-    fetch(`/api/prompts/${this.props.match.params.id}`)
+    let id = window.location.href.split("/prompts/")[1]
+    fetch(`/api/prompts/${id}`)
       .then(postData => postData.json())
       .then(jsonedPost => {
         this.setState({
