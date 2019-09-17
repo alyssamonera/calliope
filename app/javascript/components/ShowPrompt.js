@@ -46,7 +46,7 @@ class ShowPrompt extends Component {
     return (
       <div className="prompt-show">
         <button className="btn btn-dark">
-          <a href="/">
+          <a href="/browse">
             Back
           </a>
         </button>

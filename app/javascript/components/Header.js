@@ -55,7 +55,7 @@ class Header extends Component {
               About
             </li>
             <li>
-              <a href="/">
+              <a href="/browse">
                 Browse
               </a>
             </li>

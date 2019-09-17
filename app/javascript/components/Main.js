@@ -1,5 +1,6 @@
 import React from 'react'
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
+import Home from './Home.js'
 import Index from './PromptIndex.js'
 import Form from './Form.js'
 import LogIn from './LogIn.js'
@@ -138,10 +139,6 @@ class Main extends React.Component {
   //    RENDER
   // ==============
 
-  // {this.state.currentPrompt.title
-  //   ?
-  //   :
-
   render(){
     const promptOpts = {
       addPrompt: this.addPrompt,
@@ -163,6 +160,9 @@ class Main extends React.Component {
           <Switch>
 
             <Route exact path="/" render={(props) =>
+              <Home currentUser={this.props.currentUser} /> } />
+
+            <Route exact path="/browse" render={(props) =>
               <Index
                 prompts={this.state.prompts} currentUser={this.props.currentUser}
                 deletePrompt={this.deletePrompt} {...props} />} />

@@ -1,6 +1,7 @@
 import React from 'react'
 import Main from './Main.js'
 import Header from './Header.js'
+import Footer from './Footer.js'
 import {Auth} from 'aws-amplify'
 
 class App extends React.Component{
@@ -99,6 +100,7 @@ class App extends React.Component{
           currentUser={this.state.currentUser}
           setAuth={this.setAuth}
           fetchReplies={this.fetchReplies} />
+        <Footer />
       </div>
     )
   }

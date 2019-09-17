@@ -12,6 +12,15 @@ h1{
   font-family: var(--Merri);
 }
 
+a{
+  color: black;
+}
+
+a:hover{
+  color: var(--scarlet);
+  text-decoration: none;
+}
+
 .error-message{
   margin: 2em;
   padding: 1em;
