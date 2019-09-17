@@ -34,7 +34,7 @@ class Form extends Component {
       if (this.state.postType === "prompt"){
         this.props.promptOpts.updatePrompt(this.state)
       } else {
-        console.log("updating reply...");
+        this.props.replyOpts.updateReply(this.state)
       }
     }
   }
@@ -52,10 +52,13 @@ class Form extends Component {
   prepareState = (currentPost) => {
     let post = localStorage.getItem(currentPost)
     let parsedPost = JSON.parse(post)
+    let prompt_id = null
+    if (currentPost === "currentReply") {prompt_id = parsedPost.prompt.id}
     this.setState({
       title: parsedPost.title,
       body: parsedPost.body,
-      id: parsedPost.id
+      id: parsedPost.id,
+      prompt_id: prompt_id
     })
   }
 
@@ -78,13 +81,9 @@ class Form extends Component {
 
     // PRESET VALUES
     if (postType === "reply"){
-      if (action === "Add"){
-        this.preparePrompt()
-        return
-      } else {
-        this.prepareState("currentReply")
-        return
-      }
+      if (action === "Edit"){this.prepareState("currentReply")}
+      this.preparePrompt()
+      return
     } else {
       if (action === "Edit"){
         this.prepareState("currentPrompt")

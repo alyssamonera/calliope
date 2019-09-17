@@ -78,6 +78,20 @@ class Main extends React.Component {
       }
     })
       .then(window.location.href = `/prompts/${reply.prompt_id}`)
+      .catch(err => console.log(err))
+  }
+
+  updateReply = (reply) => {
+    fetch(`/api/replies/${reply.id}`, {
+      body: JSON.stringify(reply),
+      method: 'PUT',
+      headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(window.location.href=`/prompts/${reply.prompt_id}`)
+      .catch(err => console.log(err))
   }
 
 
@@ -123,7 +137,8 @@ class Main extends React.Component {
       formInputs: this.props.formInputs
     }
     const replyOpts = {
-      addReply: this.addReply
+      addReply: this.addReply,
+      updateReply: this.updateReply
     }
     const viewOpts = {
       view: this.props.view,
