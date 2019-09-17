@@ -28,7 +28,7 @@ class Form extends Component {
       if (this.state.postType === "prompt"){
         this.props.promptOpts.addPrompt(this.state)
       } else {
-        console.log("adding reply...");
+        this.props.replyOpts.addReply(this.state)
       }
     } else {
       if (this.state.postType === "prompt"){

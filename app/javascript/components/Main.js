@@ -65,6 +65,23 @@ class Main extends React.Component {
   }
 
   // ==============
+  //    REPLIES
+  // ==============
+
+  addReply = (reply) => {
+    fetch('/api/replies', {
+      body: JSON.stringify(reply),
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(window.location.href = `/prompts/${reply.prompt_id}`)
+  }
+
+
+  // ==============
   //     USERS
   // ==============
 
@@ -105,6 +122,9 @@ class Main extends React.Component {
       updatePrompt: this.updatePrompt,
       formInputs: this.props.formInputs
     }
+    const replyOpts = {
+      addReply: this.addReply
+    }
     const viewOpts = {
       view: this.props.view,
       currentUser: this.props.currentUser,
@@ -121,7 +141,7 @@ class Main extends React.Component {
                 deletePrompt={this.deletePrompt} {...props} />} />
 
             <Route path={["/new/prompt", "/edit/prompt/", "/new/reply", "/edit/reply"]} render={(props) =>
-              <Form promptOpts={promptOpts} viewOpts={viewOpts}
+              <Form promptOpts={promptOpts} replyOpts={replyOpts} viewOpts={viewOpts}
                 {...props} />} />
 
             <Route exact path="/login" render={(props) =>
