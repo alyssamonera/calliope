@@ -23,7 +23,7 @@ class ShowReply extends Component {
         id: null
       }
     }
-  }
+}
 
   prepareEdit = () => {
     let jsonedReply = JSON.stringify(this.state.reply)
@@ -57,7 +57,6 @@ class ShowReply extends Component {
   render(){
     return (
       <div>
-
         <a href={"/prompts/" + this.state.reply.prompt.id}>
           <button className="btn btn-dark">
             Back to the prompt

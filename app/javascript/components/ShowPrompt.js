@@ -46,11 +46,14 @@ class ShowPrompt extends Component {
   render(){
     return (
       <div className="prompt-show">
-        <button className="btn btn-dark">
-          <a href="/browse">
+
+        <a href="/browse">
+          <button className="btn btn-dark">
             Back
-          </a>
-        </button>
+          </button>
+        </a>
+
+
         <h1> {this.state.prompt.title} </h1>
         {this.state.prompt.body ? <p> {this.state.prompt.body} </p> : ""}
 
