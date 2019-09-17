@@ -8,8 +8,12 @@ class User
   end
 
   def self.findId(username)
-    results = DB.exec("SELECT id FROM users WHERE username='#{username}'")
-    return results.first
+    results = DB.exec("SELECT id, avatar FROM users WHERE username='#{username}'")
+    result = results.first
+    return {
+      id: result["id"].to_i,
+      avatar: result["avatar"]
+    }
   end
 
   def self.findUser(username)
@@ -67,6 +71,24 @@ class User
       <<-SQL
         INSERT INTO users (username, avatar)
         VALUES ('#{opts["username"]}', '#{opts["avatar"]}')
+        RETURNING id, username, avatar;
+      SQL
+    )
+    result = results.first
+    return {
+      id: result["id"].to_i,
+      username: result["username"],
+      avatar: result["avatar"]
+    }
+  end
+
+  def self.update(username, opts)
+    results = DB.exec(
+      <<-SQL
+        UPDATE users
+        SET
+          avatar='#{opts["avatar"]}'
+        WHERE username='#{username}'
         RETURNING id, username, avatar;
       SQL
     )

@@ -13,4 +13,8 @@ class UsersController < ApplicationController
     render json: User.findUser(params["username"])
   end
 
+  def update
+    render json: User.update(params["username"], params["user"])
+  end
+
 end

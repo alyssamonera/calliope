@@ -26,6 +26,7 @@ class App extends React.Component{
       currentUser: {
         isAuthenticated: false,
         user: null,
+        avatar: null,
         id: null
       },
       currentReply: {
@@ -53,10 +54,12 @@ class App extends React.Component{
       fetch(`/api/login/${user.username}`)
         .then(data => data.json())
         .then(jData => {
+          console.log(jData);
           this.setState({
             currentUser: {
               user: user,
               isAuthenticated: authenticated,
+              avatar: jData.avatar,
               id: parseInt(jData.id)
             }
           })

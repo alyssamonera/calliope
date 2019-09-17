@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   get '/api/users/:username', to: 'users#findUser'
   get '/api/login/:username', to: 'users#findId'
   post '/api/signup', to: 'users#create'
+  put '/api/users/:username', to: 'users#update'
 
   # RESTFUL routes for REPLIES
   get '/api/prompts/:promptId/replies', to: 'replies#index'

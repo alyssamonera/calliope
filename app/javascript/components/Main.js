@@ -3,6 +3,7 @@ import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import Home from './Home.js'
 import Index from './PromptIndex.js'
 import User from './User.js'
+import UserForm from './UserForm.js'
 import Form from './Form.js'
 import LogIn from './LogIn.js'
 import SignUp from './SignUp.js'
@@ -122,10 +123,19 @@ class Main extends React.Component {
         'Content-Type': 'application/json'
       }
     })
-      .then(createdUser => {return createdUser.json()})
-      .then(jsonedUser => {
-        alert("Please check your email for a verification link. (Don't forget to check the spam folder!)")
-      })
+      .then(alert("Please check your email for a verification link. (Don't forget to check the spam folder!)"))
+  }
+
+  updateUser = (user) => {
+    fetch(`/api/users/${user.username}`, {
+      body: JSON.stringify(user),
+      method: 'PUT',
+      headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(window.location.href = `/user/${user.username}`)
   }
 
   // ==============
@@ -171,6 +181,9 @@ class Main extends React.Component {
             <Route path={["/new/prompt", "/edit/prompt/", "/new/reply", "/edit/reply"]} render={(props) =>
               <Form promptOpts={promptOpts} replyOpts={replyOpts} viewOpts={viewOpts}
                 {...props} />} />
+
+            <Route path="/edit/user" render={(props) =>
+              <UserForm updateUser={this.updateUser} {...props} /> } />
 
             <Route exact path="/signup" render={(props) =>
               <SignUp addUser={this.addUser} {...props} />} />

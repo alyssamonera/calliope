@@ -217,6 +217,10 @@ footer{
   margin-bottom: 1em;
 }
 
+.login-page img{
+  width: 15%;
+}
+
 /* INDEX DISPLAY */
 
 .one-prompt{
