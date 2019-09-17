@@ -6,7 +6,11 @@ class UsersController < ApplicationController
   end
 
   def findId
-    render json: User.find(params["username"])
+    render json: User.findId(params["username"])
+  end
+
+  def findUser
+    render json: User.findUser(params["username"])
   end
 
 end

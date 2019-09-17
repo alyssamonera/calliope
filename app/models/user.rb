@@ -7,23 +7,34 @@ class User
     DB = PG.connect(host: "localhost", port: 5432, dbname: "calliope_development")
   end
 
-  def self.find(username)
+  def self.findId(username)
     results = DB.exec("SELECT id FROM users WHERE username='#{username}'")
     return results.first
+  end
+
+  def self.findUser(username)
+    results = DB.exec("SELECT * FROM users WHERE username='#{username}'")
+    result = results.first
+    return {
+      id: result["id"].to_i,
+      username: result["username"],
+      avatar: result["avatar"]
+    }
   end
 
   def self.create(opts)
     results = DB.exec(
       <<-SQL
-        INSERT INTO users (username)
-        VALUES ('#{opts["username"]}')
-        RETURNING id, username;
+        INSERT INTO users (username, avatar)
+        VALUES ('#{opts["username"]}', '#{opts["avatar"]}')
+        RETURNING id, username, avatar;
       SQL
     )
     result = results.first
     return {
       id: result["id"].to_i,
-      username: result["username"]
+      username: result["username"],
+      avatar: result["avatar"]
     }
   end
 

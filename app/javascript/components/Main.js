@@ -2,6 +2,7 @@ import React from 'react'
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import Home from './Home.js'
 import Index from './PromptIndex.js'
+import User from './User.js'
 import Form from './Form.js'
 import LogIn from './LogIn.js'
 import SignUp from './SignUp.js'
@@ -171,9 +172,15 @@ class Main extends React.Component {
               <Form promptOpts={promptOpts} replyOpts={replyOpts} viewOpts={viewOpts}
                 {...props} />} />
 
+            <Route exact path="/signup" render={(props) =>
+              <SignUp addUser={this.addUser} {...props} />} />
+
             <Route exact path="/login" render={(props) =>
               <LogIn setAuth={this.props.setAuth} viewOpts={viewOpts}
                 {...props} />} />
+
+            <Route path="/user/:username" render={(props) =>
+              <User currentUser={this.props.currentUser} />} />
 
             <Route path="/prompts/:id" render={(props) =>
               <ShowPrompt currentUser={this.props.currentUser} deletePrompt={this.deletePrompt} {...props} />

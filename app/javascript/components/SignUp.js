@@ -7,7 +7,17 @@ class SignUp extends Component {
     this.state = {
       username: "",
       email: "",
-      password: ""
+      password: "",
+      avatar: "",
+      error: null
+    }
+  }
+
+  defaultAvatar = () => {
+    if (this.state.avatar === ""){
+      this.setState({
+        avatar: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/User_font_awesome.svg/500px-User_font_awesome.svg.png"
+      })
     }
   }
 
@@ -20,6 +30,7 @@ class SignUp extends Component {
   handleSubmit = async event => {
     event.preventDefault()
     if (this.validate()){
+      this.defaultAvatar()
       const { username, email, password } = this.state
       try {
         const signUpResponse = await Auth.signUp({
@@ -31,19 +42,28 @@ class SignUp extends Component {
         })
         this.props.addUser(this.state)
       } catch (error) {
-        console.log(error)
         if (error.code === "UsernameExistsException"){
-          alert("Sorry, that userame already exists.")
+          this.setState({
+            error: "Sorry, that username already exists."
+          })
+        } else {
+          this.setState({
+            error: "Something went wrong. Please make sure all required fields are filled out."
+          })
         }
       }
-
     } else {
-      console.log("failed");
+      this.setState({
+        error: "Something went wrong. Please make sure all required fields are filled out."
+      })
     }
   }
 
-  validate = () => {
+  validate = async () => {
     if (this.state.username && this.state.email && this.state.password){
+      const error = await this.setState({
+        error: null
+      })
       return true
     } else {
       return false
@@ -53,6 +73,13 @@ class SignUp extends Component {
   render(){
     return (
       <div className="login-page">
+
+        {this.state.error
+          ? <div className="error-message">
+              <p>{this.state.error}</p>
+            </div>
+          : ""}
+
         <h2> Sign Up </h2>
         <form onSubmit={this.handleSubmit}>
 
@@ -64,6 +91,9 @@ class SignUp extends Component {
 
           <label htmlFor="password">Password</label>
           <input type="password" id="password" value={this.state.password} placeholder="Password" onChange={this.handleChange} />
+
+          <label htmlFor="avatar">Avatar (optional)</label>
+          <input type="text" id="avatar" value={this.state.avatar} placeholder="example.jpg" onChange={this.handleChange} />
 
           <input type="submit" value="Sign Up" className="btn btn-dark" />
 

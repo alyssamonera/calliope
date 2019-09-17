@@ -337,3 +337,28 @@ blockquote img{
   margin: 15em auto;
   width: 80%;
 }
+
+/* USERS */
+
+.user-show img{
+  display: block;
+  margin: 0 auto;
+  width: 200px;
+  height: 200px;
+}
+
+.user-show h2{
+  text-align: center;
+}
+
+.profile-actions{
+  text-align: center;
+}
+
+.profile-actions button, .profile-actions form{
+  display: inline;
+}
+
+.profile-actions input{
+  margin: 0;
+}

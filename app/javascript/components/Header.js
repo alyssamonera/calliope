@@ -28,20 +28,31 @@ class Header extends Component {
 
           <div className="title-links">
             {this.props.currentUser.isAuthenticated && this.props.currentUser.user
-              ? <button
-                  className="btn btn-dark"
-                  onClick={this.handleLogOut}>
-                    Log Out ({this.props.currentUser.user.username})
-                </button>
+              ? <div>
+                  <button
+                    className="btn btn-dark"
+                    onClick={this.handleLogOut}>
+                      Log Out ({this.props.currentUser.user.username})
+                  </button>
+
+                  <a href={"/user/" + this.props.currentUser.user.username}>
+                    <button className="btn btn-dark">
+                      Account
+                    </button>
+                  </a>
+                </div>
               : <div>
-                  <button className="btn btn-dark">
-                    <a href="/login">
+                  <a href="/login">
+                    <button className="btn btn-dark">
                       Log In
-                    </a>
-                  </button>
-                  <button className="btn btn-dark">
-                      Sign Up
-                  </button>
+                    </button>
+                  </a>
+
+                  <a href="/signup">
+                    <button className="btn btn-dark">
+                        Sign Up
+                    </button>
+                  </a>
                 </div>
             }
 
