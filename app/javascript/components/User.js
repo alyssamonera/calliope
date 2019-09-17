@@ -5,7 +5,9 @@ class User extends Component {
     super()
     this.state = {
       username: null,
-      avatar: null
+      avatar: null,
+      replies: [],
+      prompts: []
     }
   }
 
@@ -17,7 +19,9 @@ class User extends Component {
         console.log(jsonedData);
         this.setState({
           username: jsonedData.username,
-          avatar: jsonedData.avatar
+          avatar: jsonedData.avatar,
+          replies: jsonedData.replies,
+          prompts: jsonedData.prompts
         })
       })
   }
@@ -28,6 +32,26 @@ class User extends Component {
         <img src={this.state.avatar} alt="avatar" className="img-thumbnail" />
 
         <h2>{this.state.username}</h2>
+
+        <h5>Prompts written by {this.state.username}</h5>
+        <ul>
+          {this.state.prompts.map(prompt =>
+            <li key={prompt.id}>
+              <a href={"/prompts/" + prompt.id}>
+                {prompt.title}
+              </a>
+            </li>)}
+        </ul>
+
+        <h5>Stories written by {this.state.username}</h5>
+        <ul>
+          {this.state.replies.map(reply =>
+            <li key={reply.id}>
+              <a href={"/replies/" + reply.id}>
+                {reply.title}
+              </a>
+            </li>)}
+        </ul>
 
       </main>
     )

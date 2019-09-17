@@ -13,12 +13,52 @@ class User
   end
 
   def self.findUser(username)
-    results = DB.exec("SELECT * FROM users WHERE username='#{username}'")
-    result = results.first
+    results = DB.exec(
+      <<-SQL
+      SELECT
+        users.*,
+        prompts.title AS prompt_title,
+        prompts.id AS prompt_id,
+        replies.title AS reply_title,
+        replies.id AS reply_id
+      FROM
+        prompts
+      RIGHT JOIN
+        users
+      ON
+        prompts.user_id = users.id
+      LEFT JOIN
+        replies
+      ON
+        replies.user_id = users.id
+      WHERE users.username='#{username}'
+      SQL
+    )
+    replies = []
+    prompts = []
+    results.map do |result|
+      if (result["reply_id"])
+        reply = {
+          id: result["reply_id"].to_i,
+          title: result["reply_title"]
+        }
+        unless replies.include?(reply) then replies.push(reply) end
+      end
+      if (result["prompt_id"])
+        prompt = {
+          id: result["prompt_id"].to_i,
+          title: result["prompt_title"]
+        }
+        unless prompts.include?(prompt) then prompts.push(prompt) end
+      end
+    end
+    user = results.first
     return {
-      id: result["id"].to_i,
-      username: result["username"],
-      avatar: result["avatar"]
+      id: user["id"],
+      username: user["username"],
+      avatar: user["avatar"],
+      replies: replies,
+      prompts: prompts
     }
   end
 
