@@ -12,9 +12,11 @@ class Prompt extends Component {
           </a>
 
           {/* AUTHOR */}
-          <p className="blockquote-footer text-muted byline">
-            {this.props.prompt.user.username}
-          </p>
+          <a href={"/user/" + this.props.prompt.user.username}>
+            <p className="blockquote-footer text-muted byline">
+              {this.props.prompt.user.username}
+            </p>
+          </a>
 
         </blockquote>
       </div>

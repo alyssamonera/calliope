@@ -34,9 +34,11 @@ class Reply extends Component {
           </a>
         </h4>
 
-        <p className="text-muted byline">
-          by {this.props.reply.user.username}
-        </p>
+        <a href={"/user/" + this.props.reply.user.username}>
+          <p className="text-muted byline">
+            by {this.props.reply.user.username}
+          </p>
+        </a>
 
         <p>
           {this.props.reply.body.slice(0, 500)}

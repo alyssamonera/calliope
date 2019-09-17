@@ -57,9 +57,11 @@ class ShowPrompt extends Component {
         <h1> {this.state.prompt.title} </h1>
         {this.state.prompt.body ? <p> {this.state.prompt.body} </p> : ""}
 
-        <p className="blockquote-footer text-muted byline">
-          {this.state.prompt.user.username}
-        </p>
+        <a href={"/user/" + this.state.prompt.user.username}>
+          <p className="blockquote-footer text-muted byline">
+            {this.state.prompt.user.username}
+          </p>
+        </a>
 
 
         <div className="prompt-options">

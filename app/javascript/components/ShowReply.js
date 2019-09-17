@@ -71,7 +71,7 @@ class ShowReply extends Component {
 
         <div className="reply">
           <h4>{this.state.reply.title}</h4>
-          <a href="#" className="text-muted byline">
+          <a href={"/user/" + this.state.reply.user.username} className="text-muted byline">
             by {this.state.reply.user.username}
           </a>
 
