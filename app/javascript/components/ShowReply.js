@@ -85,10 +85,13 @@ class ShowReply extends Component {
           {this.state.currentUser.id
             ? this.state.currentUser.username === this.state.reply.user.username
               ? <div className="reply-options">
-                  <button className="btn btn-light" onClick={this.prepareEdit}>
-                    Edit
+                  <button className="btn btn-light"
+                    onClick={this.prepareEdit}>
+                      Edit
                   </button>
-                  <button className="btn btn-light">
+                  <button
+                    className="btn btn-light"
+                    onClick={()=> {this.props.deleteReply(this.state.reply)}}>
                     Delete
                   </button>
                 </div>

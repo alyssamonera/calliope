@@ -94,6 +94,18 @@ class Main extends React.Component {
       .catch(err => console.log(err))
   }
 
+  deleteReply = (reply) => {
+    fetch(`/api/replies/${reply.id}`, {
+      method: 'DELETE',
+      headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(window.location.href=`/prompts/${reply.prompt.id}`)
+      .catch(err => console.log(err))
+  }
+
 
   // ==============
   //     USERS
@@ -168,7 +180,7 @@ class Main extends React.Component {
               }/>
 
             <Route path="/replies/:id" render={(props) =>
-              <ShowReply currentUser={this.props.currentUser} {...props} /> } />
+              <ShowReply currentUser={this.props.currentUser} deleteReply={this.deleteReply} {...props} /> } />
 
           </Switch>
         </div>
