@@ -39,40 +39,77 @@ class Form extends Component {
     }
   }
 
+  preparePrompt = () => {
+    let prompt = localStorage.getItem("currentPrompt")
+    let parsedPrompt = JSON.parse(prompt)
+    this.setState({
+      promptTitle: parsedPrompt.title,
+      promptBody: parsedPrompt.body,
+      prompt_id: parsedPrompt.id
+    })
+  }
+
+  prepareState = (currentPost) => {
+    let post = localStorage.getItem(currentPost)
+    let parsedPost = JSON.parse(post)
+    this.setState({
+      title: parsedPost.title,
+      body: parsedPost.body,
+      id: parsedPost.id
+    })
+  }
+
   componentDidMount() {
     let action
     let postType
-    let title = ""
-    let body = ""
-    let id = null
-    let prompt_id = null
+
     // ADD OR EDIT?
-    if (window.location.href.includes("/new")){
-      action = "Add"
-    } else {
-      action = "Edit"
-      let post = localStorage.getItem("currentPost")
-      let parsedPost = JSON.parse(post)
-      title = parsedPost.title
-      body = parsedPost.body
-      id = parsedPost.id
-    }
+    if (window.location.href.includes("/new")){action = "Add"}
+    else {action = "Edit"}
+
     // PROMPT OR REPLY?
-    if (window.location.href.includes("prompt")){
-      postType = "prompt"
-    } else {postType = "reply"}
+    if (window.location.href.includes("prompt")){postType = "prompt"}
+    else {postType = "reply"}
+
     this.setState({
       action: action,
-      postType: postType,
-      title: title,
-      body: body,
-      id: id
+      postType: postType
     })
+
+    // PRESET VALUES
+    if (postType === "reply"){
+      if (action === "Add"){
+        this.preparePrompt()
+        return
+      } else {
+        this.prepareState("currentReply")
+        return
+      }
+    } else {
+      if (action === "Edit"){
+        this.prepareState("currentPrompt")
+        return
+      }
+    }
+
   }
 
   render(){
     return (
       <form onSubmit={this.handleSubmit} className="prompt-form">
+
+        {this.state.postType === "reply"
+          ?
+          <div className="original-prompt">
+            <h4>Original Prompt:</h4>
+            <blockquote>
+              {this.state.promptTitle}
+              <br />
+              {this.state.promptBody}
+            </blockquote>
+          </div>
+          : ""
+        }
 
         <h1>
           {this.state.action} your {this.state.postType}
@@ -84,7 +121,7 @@ class Form extends Component {
         <label htmlFor="body">Body</label>
         <textarea rows="10" cols="120" placeholder="body" value={this.state.body} id="body" onChange={this.handleChange} />
 
-        <input type="submit" className="btn btn-dark" value={this.state.action === "Add" ? "Add prompt" : "Submit edits"} />
+        <input type="submit" className="btn btn-dark" value="Submit" />
 
         {this.props.viewOpts.currentUser.id ? "" : <Modal handleView={this.props.viewOpts.handleView} />}
 

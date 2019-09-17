@@ -18,6 +18,13 @@ class ShowPrompt extends Component {
     }
   }
 
+  prepareEdit = (event) => {
+    event.preventDefault()
+    let jsonedPrompt = JSON.stringify(this.state.prompt)
+    localStorage.setItem("currentPrompt", jsonedPrompt)
+    window.location.href = event.target.id
+  }
+
   componentDidMount(){
     fetch(`/api/prompts/${this.props.match.params.id}`)
       .then(postData => postData.json())
@@ -28,19 +35,11 @@ class ShowPrompt extends Component {
             body: jsonedPost.body,
             user: jsonedPost.user,
             replies: jsonedPost.replies,
-            id: parseInt(jsonedPost.id)
+            id: parseInt(jsonedPost.id),
+            prompt_id: parseInt(jsonedPost.id)
           }
         })
       })
-  }
-
-  prepareEdit = (event) => {
-    event.preventDefault()
-
-    let jsonedPrompt = JSON.stringify(this.props.prompt)
-    localStorage.setItem("currentPost", jsonedPrompt)
-    window.location.href = '/edit/prompt'
-
   }
 
   render(){
@@ -64,7 +63,10 @@ class ShowPrompt extends Component {
             ? this.props.currentUser.user.username === this.state.prompt.user.username
               ?
                 <div>
-                  <button className="btn btn-light" onClick={this.prepareEdit}>
+                  <button
+                    id="/edit/prompt"
+                    className="btn btn-light"
+                    onClick={this.prepareEdit}>
                       Edit
                   </button>
 
@@ -74,8 +76,14 @@ class ShowPrompt extends Component {
                     Delete
                   </button>
                 </div>
-              : ""
-            : ""}
+              : <button
+                  id="/new/reply"
+                  className="btn btn-light"
+                  onClick={this.prepareEdit}>
+                  Write a response
+                </button>
+            : ""
+            }
         </div>
 
         <ReplyIndex prompt={this.state.prompt} currentUser={this.props.currentUser} />
