@@ -27,12 +27,14 @@ class Form extends Component {
     if (this.state.action === "Add") {
       if (this.state.postType === "prompt"){
         this.props.promptOpts.addPrompt(this.state)
+        this.props.history.push("/browse")
       } else {
         this.props.replyOpts.addReply(this.state)
       }
     } else {
       if (this.state.postType === "prompt"){
         this.props.promptOpts.updatePrompt(this.state)
+        this.props.history.push("/browse")
       } else {
         this.props.replyOpts.updateReply(this.state)
       }

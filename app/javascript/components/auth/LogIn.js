@@ -31,7 +31,7 @@ class LogIn extends Component{
 
   render(){
     return (
-      <div className="login-page">
+      <div className="auth-page">
         <h2> Log In </h2>
         <form onSubmit={this.handleSubmit}>
           <label htmlFor="username">Username</label>
@@ -39,6 +39,8 @@ class LogIn extends Component{
 
           <label htmlFor="password">Password</label>
           <input type="password" value={this.state.password} placeholder="Password" id="password" onChange={this.handleChange} />
+
+          <a href="/passrecovery">Forgot password</a>
 
           <input type="submit" value="Log In" className="btn btn-light" />
 

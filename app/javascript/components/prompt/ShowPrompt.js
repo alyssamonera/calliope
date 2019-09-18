@@ -25,6 +25,11 @@ class ShowPrompt extends Component {
     window.location.href = event.target.id
   }
 
+  handleDelete = () => {
+    this.props.deletePrompt(this.state.prompt.id)
+    this.props.history.push("/browse")
+  }
+
   componentDidMount(){
     let id = window.location.href.split("/prompts/")[1]
     fetch(`/api/prompts/${id}`)
@@ -78,7 +83,7 @@ class ShowPrompt extends Component {
 
                   <button
                     className="btn btn-light"
-                    onClick={()=>{this.props.deletePrompt(this.state.prompt.id)}}>
+                    onClick={this.handleDelete}>
                     Delete
                   </button>
                 </div>

@@ -198,27 +198,37 @@ footer{
 
 /* LOGIN FORM */
 
-.login-page {
+.auth-page {
+  display: block;
+  margin: 0 35em;
+}
+
+.auth-page h2{
   text-align: center;
 }
 
-.login-page form{
+.auth-page form{
   display: block;
   margin: 0 auto;
 }
 
-.login-page label, input{
+.auth-page label, .auth-page input{
   display: block;
   margin: 0 auto;
   text-align: center;
 }
 
-.login-page input{
-  margin-bottom: 1em;
+.auth-page a{
+  margin-left: 2.2em;
+  font-size: 0.8em;
 }
 
-.login-page img{
+.auth-page img{
   width: 15%;
+}
+
+.auth-page input[type=submit]{
+  margin-top: 1em;
 }
 
 /* INDEX DISPLAY */

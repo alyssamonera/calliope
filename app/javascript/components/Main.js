@@ -7,6 +7,8 @@ import UserForm from './profile/UserForm.js'
 import Form from './Form.js'
 import LogIn from './auth/LogIn.js'
 import SignUp from './auth/SignUp.js'
+import Recover from './auth/Recover.js'
+import Verify from './auth/Verify.js'
 import ShowPrompt from './prompt/ShowPrompt.js'
 import ShowReply from './reply/ShowReply.js'
 
@@ -39,7 +41,13 @@ class Main extends React.Component {
         'Content-Type': 'application/json'
       }
     })
-      .then(data => {window.location.href="/browse"})
+      .then(data => data.json())
+      .then(jData => {
+        this.setState(prevState => {
+          prevState.prompts.unshift(jData)
+          return {prompts: prevState.prompts}
+        })
+      })
   }
 
   updatePrompt = (prompt) => {
@@ -51,7 +59,14 @@ class Main extends React.Component {
         'Content-Type': 'application/json'
       }
     })
-      .then(data => {window.location.href="/browse"})
+      .then(data => data.json())
+      .then(jData => {
+        this.setState(prevState => {
+          let index = prevState.prompts.findIndex(eachPrompt => eachPrompt.id === prompt.id)
+          prevState.prompts.splice(index, 1, jData)
+          return {prompts: prevState.prompts}
+        })
+      })
       .catch(err => console.log(err))
   }
 
@@ -63,7 +78,12 @@ class Main extends React.Component {
         'Content-Type': 'application/json'
       }
     })
-      .then(data => {window.location.href="/browse"})
+      .then(data => {
+        this.setState(prevState => {
+          const prompts = prevState.prompts.filter(prompt => prompt.id !== id)
+          return {prompts}
+        })
+      })
       .catch(err => console.log(err))
   }
 
@@ -105,7 +125,7 @@ class Main extends React.Component {
         'Content-Type': 'application/json'
       }
     })
-      .then(window.location.href=`/prompts/${reply.prompt.id}`)
+      .then(window.location.href=`/prompts/${reply.prompt_id}`)
       .catch(err => console.log(err))
   }
 
@@ -170,37 +190,53 @@ class Main extends React.Component {
         <div>
           <Switch>
 
+            {/* HOME */}
             <Route exact path="/" render={(props) =>
               <Home currentUser={this.props.currentUser} /> } />
 
+            {/* BROWSE */}
             <Route exact path="/browse" render={(props) =>
               <Index
                 prompts={this.state.prompts} currentUser={this.props.currentUser}
                 deletePrompt={this.deletePrompt} {...props} />} />
 
-            <Route path={["/new/prompt", "/edit/prompt/", "/new/reply", "/edit/reply"]} render={(props) =>
-              <Form promptOpts={promptOpts} replyOpts={replyOpts} viewOpts={viewOpts}
-                {...props} />} />
-
-            <Route path="/edit/user" render={(props) =>
-              <UserForm updateUser={this.updateUser} {...props} /> } />
-
-            <Route exact path="/signup" render={(props) =>
-              <SignUp addUser={this.addUser} {...props} />} />
-
-            <Route exact path="/login" render={(props) =>
-              <LogIn setAuth={this.props.setAuth} viewOpts={viewOpts}
-                {...props} />} />
-
-            <Route path="/user/:username" render={(props) =>
-              <User currentUser={this.props.currentUser} />} />
-
+            {/* ONE PROMPT */}
             <Route path="/prompts/:id" render={(props) =>
               <ShowPrompt currentUser={this.props.currentUser} deletePrompt={this.deletePrompt} {...props} />
               }/>
 
+            {/* ONE REPLY */}
             <Route path="/replies/:id" render={(props) =>
               <ShowReply currentUser={this.props.currentUser} deleteReply={this.deleteReply} {...props} /> } />
+
+            {/* ADD & EDIT FORM */}
+            <Route path={["/new/prompt", "/edit/prompt/", "/new/reply", "/edit/reply"]} render={(props) =>
+              <Form promptOpts={promptOpts} replyOpts={replyOpts} viewOpts={viewOpts} {...props} />} />
+
+            {/* SIGN UP */}
+            <Route exact path="/signup" render={(props) =>
+              <SignUp addUser={this.addUser} {...props} />} />
+
+            {/* LOGIN */}
+            <Route exact path="/login" render={(props) =>
+              <LogIn setAuth={this.props.setAuth} viewOpts={viewOpts}
+                {...props} />} />
+
+            {/* PASSWORD RECOVERY */}
+            <Route exact path="/passrecovery" render={(props) =>
+              <Recover {...props} /> } />
+
+            {/* PASSWORD VERIFICATION */}
+            <Route exact path="/passverification" render={(props) =>
+              <Verify {...props} /> } />
+
+            {/* PROFILE */}
+            <Route path="/user/:username" render={(props) =>
+              <User currentUser={this.props.currentUser} />} />
+
+            {/* PROFILE UPDATE */}
+            <Route path="/edit/user" render={(props) =>
+              <UserForm updateUser={this.updateUser} {...props} /> } />
 
           </Switch>
         </div>

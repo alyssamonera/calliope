@@ -31,7 +31,7 @@ class UserForm extends Component {
 
   render(){
     return (
-      <form className="login-page" onSubmit={this.handleSubmit}>
+      <form className="auth-page" onSubmit={this.handleSubmit}>
 
         <img src={this.state.avatar} alt="avatar" className="img-thumbnail" />
 

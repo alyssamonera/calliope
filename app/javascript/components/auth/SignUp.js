@@ -72,7 +72,7 @@ class SignUp extends Component {
 
   render(){
     return (
-      <div className="login-page">
+      <div className="auth-page">
 
         {this.state.error
           ? <div className="error-message">
