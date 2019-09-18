@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import ReplyIndex from './ReplyIndex.js'
+import ReplyIndex from '../reply/ReplyIndex.js'
 
 class ShowPrompt extends Component {
   constructor(){

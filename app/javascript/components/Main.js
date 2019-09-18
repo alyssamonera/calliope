@@ -1,14 +1,14 @@
 import React from 'react'
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import Home from './Home.js'
-import Index from './PromptIndex.js'
-import User from './User.js'
-import UserForm from './UserForm.js'
+import Index from './prompt/PromptIndex.js'
+import User from './profile/User.js'
+import UserForm from './profile/UserForm.js'
 import Form from './Form.js'
-import LogIn from './LogIn.js'
-import SignUp from './SignUp.js'
-import ShowPrompt from './ShowPrompt.js'
-import ShowReply from './ShowReply.js'
+import LogIn from './auth/LogIn.js'
+import SignUp from './auth/SignUp.js'
+import ShowPrompt from './prompt/ShowPrompt.js'
+import ShowReply from './reply/ShowReply.js'
 
 class Main extends React.Component {
   constructor(){

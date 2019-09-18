@@ -1,7 +1,7 @@
 import React from 'react'
 import Main from './Main.js'
-import Header from './Header.js'
-import Footer from './Footer.js'
+import Header from './partials/Header.js'
+import Footer from './partials/Footer.js'
 import {Auth} from 'aws-amplify'
 
 class App extends React.Component{
