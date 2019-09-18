@@ -54,7 +54,6 @@ class App extends React.Component{
       fetch(`/api/login/${user.username}`)
         .then(data => data.json())
         .then(jData => {
-          console.log(jData);
           this.setState({
             currentUser: {
               user: user,

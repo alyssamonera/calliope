@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import {Auth} from 'aws-amplify'
 
 class Verify extends Component {
   constructor(){
@@ -16,9 +17,19 @@ class Verify extends Component {
     })
   }
 
-  handleSubmit = (event) => {
+  handleSubmit = async (event) => {
     event.preventDefault()
-    console.log(this.state);
+    try {
+      await Auth.forgotPasswordSubmit(
+        this.state.email,
+        this.state.code,
+        this.state.password
+      )
+      alert("Password successfully updated. Redirecting...")
+      this.props.history.push("/login")
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   render(){

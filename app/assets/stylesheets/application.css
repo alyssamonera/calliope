@@ -224,7 +224,9 @@ footer{
 }
 
 .auth-page img{
-  width: 15%;
+  display: block;
+  margin: 0 auto;
+  width: 100%;
 }
 
 .auth-page input[type=submit]{

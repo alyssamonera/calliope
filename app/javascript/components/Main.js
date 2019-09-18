@@ -155,7 +155,6 @@ class Main extends React.Component {
         'Content-Type': 'application/json'
       }
     })
-      .then(window.location.href = `/user/${user.username}`)
   }
 
   // ==============
