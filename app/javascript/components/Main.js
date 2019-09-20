@@ -16,7 +16,8 @@ class Main extends React.Component {
   constructor(){
     super()
     this.state = {
-      prompts: []
+      prompts: [],
+      quote: ""
     }
   }
 
@@ -158,11 +159,25 @@ class Main extends React.Component {
   }
 
   // ==============
+  //   QUOTES API
+  // ==============
+  fetchQuote = () => {
+    fetch("https://favqs.com/api/qotd")
+      .then(data => data.json())
+      .then(jData => {
+        this.setState({
+          quote: `"${jData.quote.body}" - ${jData.quote.author}`
+        })
+      })
+  }
+
+  // ==============
   //   LIFE CYCLE
   // ==============
 
   componentDidMount() {
     this.fetchPrompts()
+    this.fetchQuote()
   }
 
   // ==============
@@ -191,7 +206,7 @@ class Main extends React.Component {
 
             {/* HOME */}
             <Route exact path="/" render={(props) =>
-              <Home currentUser={this.props.currentUser} /> } />
+              <Home currentUser={this.props.currentUser} quote={this.state.quote} /> } />
 
             {/* BROWSE */}
             <Route exact path="/browse" render={(props) =>

@@ -63,9 +63,6 @@ class Header extends Component {
         <nav>
           <ul>
             <li>
-              About
-            </li>
-            <li>
               <a href="/browse">
                 Browse
               </a>

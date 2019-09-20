@@ -1,25 +1,35 @@
 # calliope
-Calliope redone with Ruby on Rails, React, and AWS
+Calliope redone with Ruby on Rails, React, and AWS. [Live on Heroku](https://calliope-redux.herokuapp.com/).
 
 # User Stories
-* Users can sign up with their email address and verify their account through an email confirmation link.
+
+## Prompts and Replies
 * Users can browse stories and prompts as guests, but must log in to create prompts or stories.
-* STRETCH: Users can add stories and prompts to their favorites.
-* STRETCH: Users can have photo and video prompts.
+* Users can view individual prompts and all responses to it on the prompt show page.
+* All response show pages link back to the prompt they came from.
 
-# Planned Features
+## Users
+* Users can sign up with their email address and verify their account through an email confirmation link.
+* If a user forgets their password, they can request to receive a verification token and change their password.
+* Logged in users can update their avatar and password on their account page.
+* Everything a user posts may be seen on their profile page.
+* Users are automatically signed in whenever they visit the page, across browser refreshes, unless they sign out.
 
-## Minimum Viable Product (MVP)
-* Has full CRUD for at least one model
-* Has at least two models that are related to each other
-* Runs on Ruby on Rails
-* Uses a Postgresql database that is hosted with an AWS Relational Database Service (RDS)
-* Utilizes the AWS authentication service, Cognito
+# Tech Used
+* Ruby on Rails
+* Postgres
+* React
+* React Router
+* AWS RDS (Amazon Web Services' Relational Database Service)
+* AWS Cognito & Amplify library
+* Quotes API
+* Bootstrap CSS Framework
 
-## Stretch Goals
-* Utilizes a rich text editor
-* Has three models that are all related to each other
+# Future improvements
+* A WYSIWYG editor like DraftJS
+* Users can add stories and prompts to their favorites.
+* Users can have photo and video prompts.
+* Users can delete their accounts.
 
 # "Wireframe"
-
 The product should look more or less the same as [this site](https://calliope-app.herokuapp.com/) with some minor adjustments.

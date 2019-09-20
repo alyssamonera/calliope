@@ -9,6 +9,12 @@ class Home extends Component {
         {this.props.currentUser.id ? `, ${this.props.currentUser.user.username}`: ""}
         !
         </h2>
+
+        <div className="quote-container">
+          <p className="text-muted">
+            {this.props.quote}
+          </p>
+        </div>
       </main>
     )
   }
