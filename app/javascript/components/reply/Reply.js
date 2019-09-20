@@ -42,9 +42,9 @@ class Reply extends Component {
 
         <p>
           {this.props.reply.body.slice(0, 500)}
-          <span className="readmore">
+          <a className="readmore" href={"/replies/" + this.props.reply.id}>
             Read more
-          </span>
+          </a>
         </p>
 
       </div>
