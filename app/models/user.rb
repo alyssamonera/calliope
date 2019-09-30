@@ -1,7 +1,6 @@
 class User
-  if (ENV["DATABASE_URL"])
-    encoded_url = URI.encode(ENV["DATABASE_URL"])
-    uri = URI.parse(encoded_url)
+  if (ENV["HEROKU_POSTGRESQL_CHARCOAL_URL"])
+    uri = URI.parse(ENV["HEROKU_POSTGRESQL_CHARCOAL_URL"])
     DB = PG.connect(uri.hostname, uri.port, nil, nil, uri.path[1..-1], uri.user, uri.password)
   else
     DB = PG.connect(host: "localhost", port: 5432, dbname: "calliope_development")
