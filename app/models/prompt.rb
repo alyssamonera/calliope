@@ -1,6 +1,6 @@
 class Prompt
-  if (ENV["HEROKU_POSTGRESQL_CHARCOAL_URL"])
-    uri = URI.parse(ENV["HEROKU_POSTGRESQL_CHARCOAL_URL"])
+  if (ENV["DATABASE_URL"])
+    uri = URI.parse(ENV["DATABASE_URL"])
     DB = PG.connect(uri.hostname, uri.port, nil, nil, uri.path[1..-1], uri.user, uri.password)
     else
       DB = PG.connect(host: "localhost", port: 5432, dbname: "calliope_development")
